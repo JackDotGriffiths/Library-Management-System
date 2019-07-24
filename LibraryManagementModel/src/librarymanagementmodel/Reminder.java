@@ -13,11 +13,16 @@ public class Reminder {
     public Loan loan;
     public String SendDate;
     public String ReminderText;
-    
+   
     public void Reminder(Loan loanID,String sendDate,String text){
         this.loan = loanID;
         this.SendDate = sendDate;
         this.ReminderText = text;
+        
+        ReminderManager reminderManager = new ReminderManager();
+        reminderManager.AddReminder(this);
     }
+    
+    
     
 }

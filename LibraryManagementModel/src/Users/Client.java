@@ -26,7 +26,18 @@ public class Client extends User{
     }
     
     public void ReturnItem(Loan loan){
+        //Finds the specified loan and removes it from ActiveLoans List
+        for(Loan activeloan: ActiveLoans){
+            if (activeloan == loan){
+                ActiveLoans.remove(activeloan);
+            }
+        }
         loan.DeactivateLoan("Inactive");
+    }
+    
+    public List<Reminder> ViewReminders(){
+        ReminderManager reminderManager = new ReminderManager();
+        return reminderManager.reminders;
     }
     
     public void RequestResource(String text){
@@ -44,4 +55,7 @@ public class Client extends User{
         requestExtension.ExtensionRequest(loan, extensionLength);
     }
     
+    public List<Loan> ListLoans(){
+        return ActiveLoans;
+    }
 }
