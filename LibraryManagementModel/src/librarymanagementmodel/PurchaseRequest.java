@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package librarymanagementmodel;
+import Users.*;
 
 /**
  *
@@ -12,4 +13,9 @@ package librarymanagementmodel;
 public class PurchaseRequest {
     public String Title;
     
+    public void PurchaseRequest(String title){
+        this.Title = title;
+        Admin admin = new Admin();
+        admin.addRequest(this);
+    }
 }

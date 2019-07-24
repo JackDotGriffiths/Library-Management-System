@@ -14,4 +14,10 @@ public class Reminder {
     public String SendDate;
     public String ReminderText;
     
+    public void Reminder(Loan loanID,String sendDate,String text){
+        this.loan = loanID;
+        this.SendDate = sendDate;
+        this.ReminderText = text;
+    }
+    
 }
