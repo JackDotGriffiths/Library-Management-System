@@ -10,5 +10,8 @@ package librarymanagementmodel;
  * @author jack-
  */
 public class ExtensionRequest {
+    public Loan loan;
+    public int ExtensionLength;
+    public String Status;
     
 }

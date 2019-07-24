@@ -4,6 +4,8 @@
  * and open the template in the editor.
  */
 package Users;
+import librarymanagementmodel.*;
+import java.util.*;
 
 /**
  *
@@ -11,4 +13,8 @@ package Users;
  */
 public class Admin {
     
+    public void CreateResource(String InputName, String InputType, int Category, String LoanLength, int RatingTotal, int RatingCount){
+        Resource resource = new Resource();
+        resource.NewResource(InputName, InputType, Category, LoanLength, RatingTotal, RatingCount);
+    }
 }

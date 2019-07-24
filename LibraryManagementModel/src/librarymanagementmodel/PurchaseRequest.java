@@ -10,5 +10,6 @@ package librarymanagementmodel;
  * @author jack-
  */
 public class PurchaseRequest {
+    public String Title;
     
 }

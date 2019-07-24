@@ -17,4 +17,13 @@ public class Resource {
     public int RatingTotal;
     public int RatingCount;
     
+    
+    public void NewResource(String name, String type, int category, String loanLength,int ratingTotal, int ratingCount){
+        this.Name = name;
+        this.Type = type;
+        this.Category = category;
+        this.LoanLength = loanLength;
+        this.RatingTotal = ratingTotal;
+        this.RatingCount = ratingCount;
+    }
 }
