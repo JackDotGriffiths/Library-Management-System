@@ -29,22 +29,44 @@ public class Admin extends User{
     }
     
     public void addRequest(PurchaseRequest request){
-        purchaseRequests.add(request);
+       try{
+              purchaseRequests.add(request);
+       }
+       catch (Exception e){
+           System.out.println("ERROR: " + e);
+       }
+               
+                 
     }
     
     public void RequestResourceReturn(Loan loan, String date){
-        Reminder reminder = new Reminder();
+        try{
+            Reminder reminder = new Reminder();
         String text = "We request that you return the specified book by the attatched date";
         reminder.Reminder(loan, date, text);
+        }
+       catch (Exception e){
+           System.out.println("ERROR: " + e);
+       }
     }
     
     public void ApproveExtensionRequest(ExtensionRequest extensionRequest){
-        extensionRequest.Status = "Approved";
-        extensionRequest.loan.resource.LoanLength = extensionRequest.loan.resource.LoanLength + extensionRequest.ExtensionLength;
+        try{
+            extensionRequest.Status = "Approved";
+            extensionRequest.loan.resource.LoanLength = extensionRequest.loan.resource.LoanLength + extensionRequest.ExtensionLength;
+        }
+       catch (Exception e){
+           System.out.println("ERROR: " + e);
+       }
     }
     
     public void DenyExtensionRequest(ExtensionRequest extensionRequest){
-        extensionRequest.Status = "Rejected";
+        try{
+            extensionRequest.Status = "Rejected";
+        }
+        catch (Exception e){
+           System.out.println("ERROR: " + e);
+       }
     }
     
 }

@@ -11,12 +11,19 @@ import java.util.ArrayList;
  *
  * @author jack-
  */
-public abstract class User{
+public class User{
     
     protected String uniqueID;
     protected String password;
     protected String givenName;
     protected String surname;
+    
+    public void User(String uid,String pass,String name, String surname){
+        this.uniqueID = uid;
+        this.password = pass;
+        this.givenName = name;
+        this.surname = surname;
+    }
     
     public void setUniqueID(String ID)
     {
