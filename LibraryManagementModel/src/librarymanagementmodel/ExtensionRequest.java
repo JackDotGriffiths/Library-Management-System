@@ -14,4 +14,10 @@ public class ExtensionRequest {
     public int ExtensionLength;
     public String Status;
     
+    public void ExtensionRequest(Loan loan, int extensionLength){
+        this.loan = loan;
+        this.ExtensionLength = extensionLength;
+        this.Status = "Awaiting";
+    }
+    
 }
