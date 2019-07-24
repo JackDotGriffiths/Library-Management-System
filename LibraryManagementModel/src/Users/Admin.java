@@ -14,7 +14,7 @@ import java.util.*;
 public class Admin {
     
     private List<PurchaseRequest> purchaseRequests = new ArrayList<PurchaseRequest>();
-    public void CreateResource(String InputName, String InputType, int Category, String LoanLength, int RatingTotal, int RatingCount){
+    public void CreateResource(String InputName, String InputType, int Category, int LoanLength, int RatingTotal, int RatingCount){
         Resource resource = new Resource();
         resource.Resource(InputName, InputType, Category, LoanLength, RatingTotal, RatingCount);
     }
@@ -37,4 +37,6 @@ public class Admin {
         String text = "We request that you return the specified book by the attatched date";
         reminder.Reminder(loan, date, text);
     }
+    
+    
 }
