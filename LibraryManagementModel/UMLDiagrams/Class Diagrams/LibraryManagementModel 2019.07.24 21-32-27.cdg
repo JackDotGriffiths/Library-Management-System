@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ClassDiagram name="LibraryManagementModel">
+  <ClassDiagramComponents>
+    <Class name="ExtensionRequest" package="librarymanagementmodel" visibility="public" xPosition="20.0" yPosition="20.0">
+      <Fields>
+        <Field name="loan" type="Loan" visibility="public"/>
+        <Field name="ExtensionLength" type="int" visibility="public"/>
+        <Field name="Status" type="String" visibility="public"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="ExtensionRequest" returnType="void" visibility="public">
+          <Argument type="Loan" name="loan"/>
+          <Argument type="int" name="extensionLength"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="LibraryManagementModel" package="librarymanagementmodel" visibility="public" xPosition="320.0" yPosition="20.0">
+      <Fields/>
+      <Constructors/>
+      <Methods>
+        <Method name="main" returnType="void" visibility="public" isStatic="true">
+          <Argument type="String[]" name="args"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="Loan" package="librarymanagementmodel" visibility="public" xPosition="620.0" yPosition="20.0">
+      <Fields>
+        <Field name="resource" type="Resource" visibility="public"/>
+        <Field name="LoanStatus" type="String" visibility="public"/>
+        <Field name="DateLoaned" type="String" visibility="public"/>
+        <Field name="LoanLength" type="int" visibility="public"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="Loan" returnType="void" visibility="public">
+          <Argument type="Resource" name="resource"/>
+          <Argument type="String" name="loanStatus"/>
+          <Argument type="String" name="dateLoaned"/>
+          <Argument type="int" name="loanLength"/>
+        </Method>
+        <Method name="DeactivateLoan" returnType="void" visibility="public">
+          <Argument type="String" name="loanStatus"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="PurchaseRequest" package="librarymanagementmodel" visibility="public" xPosition="920.0" yPosition="20.0">
+      <Fields>
+        <Field name="Title" type="String" visibility="public"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="PurchaseRequest" returnType="void" visibility="public">
+          <Argument type="String" name="title"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="Reminder" package="librarymanagementmodel" visibility="public" xPosition="1220.0" yPosition="20.0">
+      <Fields>
+        <Field name="loan" type="Loan" visibility="public"/>
+        <Field name="SendDate" type="String" visibility="public"/>
+        <Field name="ReminderText" type="String" visibility="public"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="Reminder" returnType="void" visibility="public">
+          <Argument type="Loan" name="loanID"/>
+          <Argument type="String" name="sendDate"/>
+          <Argument type="String" name="text"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="ReminderManager" package="librarymanagementmodel" visibility="public" xPosition="1520.0" yPosition="20.0">
+      <Fields>
+        <Field name="reminders" type="List&lt;Reminder&gt;" visibility="public"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="AddReminder" returnType="void" visibility="public">
+          <Argument type="Reminder" name="reminder"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="Resource" package="librarymanagementmodel" visibility="public" xPosition="1820.0" yPosition="20.0">
+      <Fields>
+        <Field name="Name" type="String" visibility="public"/>
+        <Field name="Type" type="String" visibility="public"/>
+        <Field name="Category" type="int" visibility="public"/>
+        <Field name="LoanLength" type="int" visibility="public"/>
+        <Field name="Status" type="String" visibility="public"/>
+        <Field name="RatingTotal" type="int" visibility="public"/>
+        <Field name="RatingCount" type="int" visibility="public"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="Resource" returnType="void" visibility="public">
+          <Argument type="String" name="name"/>
+          <Argument type="String" name="type"/>
+          <Argument type="int" name="category"/>
+          <Argument type="int" name="loanLength"/>
+          <Argument type="int" name="ratingTotal"/>
+          <Argument type="int" name="ratingCount"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="Admin" package="Users" visibility="public" xPosition="2120.0" yPosition="20.0">
+      <Fields>
+        <Field name="purchaseRequests" type="List&lt;PurchaseRequest&gt;" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="CreateResource" returnType="void" visibility="public">
+          <Argument type="String" name="InputName"/>
+          <Argument type="String" name="InputType"/>
+          <Argument type="int" name="Category"/>
+          <Argument type="int" name="LoanLength"/>
+          <Argument type="int" name="RatingTotal"/>
+          <Argument type="int" name="RatingCount"/>
+        </Method>
+        <Method name="SendReminder" returnType="void" visibility="public">
+          <Argument type="Loan" name="loan"/>
+          <Argument type="String" name="date"/>
+          <Argument type="String" name="text"/>
+        </Method>
+        <Method name="ReadRequests" returnType="List&lt;PurchaseRequest&gt;" visibility="public"/>
+        <Method name="addRequest" returnType="void" visibility="public">
+          <Argument type="PurchaseRequest" name="request"/>
+        </Method>
+        <Method name="RequestResourceReturn" returnType="void" visibility="public">
+          <Argument type="Loan" name="loan"/>
+          <Argument type="String" name="date"/>
+        </Method>
+        <Method name="ApproveExtensionRequest" returnType="void" visibility="public">
+          <Argument type="ExtensionRequest" name="extensionRequest"/>
+        </Method>
+        <Method name="DenyExtensionRequest" returnType="void" visibility="public">
+          <Argument type="ExtensionRequest" name="extensionRequest"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="Client" package="Users" visibility="public" xPosition="20.0" yPosition="420.0">
+      <Fields>
+        <Field name="ActiveLoans" type="List&lt;Loan&gt;" visibility="private"/>
+        <Field name="ActiveExtensionRequests" type="List&lt;ExtensionRequest&gt;" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="BorrowItem" returnType="void" visibility="public">
+          <Argument type="Resource" name="resource"/>
+        </Method>
+        <Method name="ReturnItem" returnType="void" visibility="public">
+          <Argument type="Loan" name="loan"/>
+        </Method>
+        <Method name="ViewReminders" returnType="List&lt;Reminder&gt;" visibility="public"/>
+        <Method name="RequestResource" returnType="void" visibility="public">
+          <Argument type="String" name="text"/>
+        </Method>
+        <Method name="RateResource" returnType="void" visibility="public">
+          <Argument type="Resource" name="resource"/>
+          <Argument type="int" name="Rating"/>
+        </Method>
+        <Method name="RequestExtension" returnType="void" visibility="public">
+          <Argument type="Loan" name="loan"/>
+          <Argument type="int" name="extensionLength"/>
+        </Method>
+        <Method name="ListLoans" returnType="List&lt;Loan&gt;" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="User" package="Users" visibility="public" isAbstract="true" xPosition="320.0" yPosition="420.0">
+      <Fields>
+        <Field name="uniqueID" type="String" visibility="protected"/>
+        <Field name="password" type="String" visibility="protected"/>
+        <Field name="givenName" type="String" visibility="protected"/>
+        <Field name="surname" type="String" visibility="protected"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="setUniqueID" returnType="void" visibility="public">
+          <Argument type="String" name="ID"/>
+        </Method>
+        <Method name="getUniqueID" returnType="String" visibility="public"/>
+        <Method name="GetPassword" returnType="String" visibility="public">
+          <Argument type="String" name="uniqueID"/>
+        </Method>
+        <Method name="GetName" returnType="String" visibility="public"/>
+      </Methods>
+    </Class>
+  </ClassDiagramComponents>
+  <ClassDiagramRelations>
+    <UseRelation source="Users.Admin" target="librarymanagementmodel.Loan" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="Users.Admin" target="librarymanagementmodel.PurchaseRequest" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="loan" source="librarymanagementmodel.Reminder" target="librarymanagementmodel.Loan" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="ActiveLoans" source="Users.Client" target="librarymanagementmodel.Loan" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="List&lt;Loan&gt;"/>
+    <UseRelation source="librarymanagementmodel.ExtensionRequest" target="librarymanagementmodel.Loan" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="purchaseRequests" source="Users.Admin" target="librarymanagementmodel.PurchaseRequest" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="List&lt;PurchaseRequest&gt;"/>
+    <UseRelation source="Users.Client" target="librarymanagementmodel.Reminder" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="loan" source="librarymanagementmodel.ExtensionRequest" target="librarymanagementmodel.Loan" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="librarymanagementmodel.Reminder" target="librarymanagementmodel.Loan" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="reminders" source="librarymanagementmodel.ReminderManager" target="librarymanagementmodel.Reminder" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="List&lt;Reminder&gt;"/>
+    <HasRelation name="ActiveExtensionRequests" source="Users.Client" target="librarymanagementmodel.ExtensionRequest" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="List&lt;ExtensionRequest&gt;"/>
+    <UseRelation source="Users.Admin" target="librarymanagementmodel.ExtensionRequest" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="Users.Client" target="librarymanagementmodel.Loan" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <IsRelation name="is" source="Users.Client" target="Users.User"/>
+    <UseRelation source="Users.Client" target="librarymanagementmodel.Resource" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="librarymanagementmodel.ReminderManager" target="librarymanagementmodel.Reminder" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <IsRelation name="is" source="Users.Admin" target="Users.User"/>
+    <UseRelation source="librarymanagementmodel.Loan" target="librarymanagementmodel.Resource" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="resource" source="librarymanagementmodel.Loan" target="librarymanagementmodel.Resource" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+  </ClassDiagramRelations>
+</ClassDiagram>
