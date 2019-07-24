@@ -11,7 +11,7 @@ import java.util.*;
  *
  * @author jack-
  */
-public class Admin {
+public class Admin extends User{
     
     private List<PurchaseRequest> purchaseRequests = new ArrayList<PurchaseRequest>();
     public void CreateResource(String InputName, String InputType, int Category, int LoanLength, int RatingTotal, int RatingCount){
@@ -38,5 +38,13 @@ public class Admin {
         reminder.Reminder(loan, date, text);
     }
     
+    public void ApproveExtensionRequest(ExtensionRequest extensionRequest){
+        extensionRequest.Status = "Approved";
+        extensionRequest.loan.resource.LoanLength = extensionRequest.loan.resource.LoanLength + extensionRequest.ExtensionLength;
+    }
+    
+    public void DenyExtensionRequest(ExtensionRequest extensionRequest){
+        extensionRequest.Status = "Rejected";
+    }
     
 }
