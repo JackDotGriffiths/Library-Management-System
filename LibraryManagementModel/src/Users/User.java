@@ -34,11 +34,11 @@ public class User{
         return uniqueID;
     }
     
-    public String GetPassword(String uniqueID){
+    public String getPassword(){
         return password;
     }
     
-    public String GetName(){
+    public String getName(){
         String name = givenName + " " + surname;
         return name;
     }
