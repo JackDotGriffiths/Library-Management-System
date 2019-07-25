@@ -51,7 +51,7 @@ public class ClientTest {
         Client instance = new Client();
         instance.BorrowItem(resource);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        fail("Unable to test");
     }
 
     /**
@@ -64,7 +64,7 @@ public class ClientTest {
         Client instance = new Client();
         instance.ReturnItem(loan);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        fail("Unable to test");
     }
 
     /**
@@ -78,7 +78,7 @@ public class ClientTest {
         List<Reminder> result = instance.ViewReminders();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        fail("Unable to test");
     }
 
     /**

@@ -6,27 +6,22 @@
 package Users;
 
 import java.util.List;
-import librarymanagementmodel.ExtensionRequest;
-import librarymanagementmodel.Loan;
-import librarymanagementmodel.PurchaseRequest;
+import librarymanagementmodel.*;
+import static org.hamcrest.CoreMatchers.is;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThat;
 
 /**
  *
  * @author jack-
  */
 public class AdminTest {
-    
-    public AdminTest() {
-        
-        Admin testAdmin = new Admin();
-        testAdmin = "A000","TestPass","TestName","TestSurname";
-    }
     
     @BeforeClass
     public static void setUpClass() {
@@ -50,16 +45,26 @@ public class AdminTest {
     @Test
     public void testCreateResource() {
         System.out.println("CreateResource");
-        String InputName = "";
-        String InputType = "";
+        String InputName = "iPad for Dummies";
+        String InputType = "Book";
         int Category = 0;
-        int LoanLength = 0;
+        int LoanLength = 14;
         int RatingTotal = 0;
         int RatingCount = 0;
-        Admin instance = new Admin();
-        instance.CreateResource(InputName, InputType, Category, LoanLength, RatingTotal, RatingCount);
+        Resource instance = new Resource();
+        instance.Resource(InputName, InputType, Category, LoanLength, RatingTotal, RatingCount);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        try{
+            assertEquals("Name must be correct",instance.Name,"iPad for Dummies");
+            assertEquals("Type must be correct",instance.Type,"Book");
+            assertThat("Categorty must be correct",instance.Category,is(0));
+            assertThat("LoanLength must be correct",instance.LoanLength,is(14));
+            assertThat("RatingTotal must be 0",instance.RatingTotal,is(0));
+            assertThat("RatingCount must be 0",instance.RatingCount,is(0));
+        }catch(Exception e){
+            fail("ERROR : " + e);
+        }
+        //Ensures instance is created as expected. Data validation will occur through GUI.
     }
 
     /**
@@ -69,12 +74,18 @@ public class AdminTest {
     public void testSendReminder() {
         System.out.println("SendReminder");
         Loan loan = null;
-        String date = "";
-        String text = "";
-        Admin instance = new Admin();
-        instance.SendReminder(loan, date, text);
+        String date = "25-05-2019";
+        String text = "Please return your copy of iPad for Dummies.";
+        Reminder instance = new Reminder();
+        instance.Reminder(loan, date, text);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        try{
+            //Unable to generate a Loan and Hence unable to test. 
+            assertEquals("Date must be correct",instance.SendDate,"25-05-2019");
+            assertEquals("Text must be correct",instance.ReminderText,"Please return your copy of iPad for Dummies.");    
+        }catch(Exception e){
+            fail("ERROR: " + e);
+        }   
     }
 
     /**
@@ -88,7 +99,7 @@ public class AdminTest {
         List<PurchaseRequest> result = instance.ReadRequests();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        fail("Unable to test.");
     }
 
     /**
@@ -101,7 +112,7 @@ public class AdminTest {
         Admin instance = new Admin();
         instance.addRequest(request);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        fail("Unable to test.");
     }
 
     /**
@@ -115,7 +126,7 @@ public class AdminTest {
         Admin instance = new Admin();
         instance.RequestResourceReturn(loan, date);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        fail("Unable to test.");
     }
 
     /**
@@ -128,7 +139,7 @@ public class AdminTest {
         Admin instance = new Admin();
         instance.ApproveExtensionRequest(extensionRequest);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        fail("Unable to test.");
     }
 
     /**
@@ -141,7 +152,7 @@ public class AdminTest {
         Admin instance = new Admin();
         instance.DenyExtensionRequest(extensionRequest);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        fail("Unable to test.");
     }
     
 }
