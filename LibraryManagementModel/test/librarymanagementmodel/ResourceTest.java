@@ -49,8 +49,7 @@ public class ResourceTest {
         int loanLength = 0;
         int ratingTotal = 0;
         int ratingCount = 0;
-        Resource instance = new Resource();
-        instance.Resource(name, type, category, loanLength, ratingTotal, ratingCount);
+        Resource instance = new Resource(name, type, category, loanLength, ratingTotal, ratingCount);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }

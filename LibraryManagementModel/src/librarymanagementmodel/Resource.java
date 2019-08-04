@@ -10,16 +10,17 @@ package librarymanagementmodel;
  * @author jack-
  */
 public class Resource {
+    
     public String Name;
     public String Type;
     public int Category;
     public int LoanLength;
-    public String Status;
+    public String Status = "Available";
     public int RatingTotal;
     public int RatingCount;
     
     
-    public void Resource(String name, String type, int category, int loanLength,int ratingTotal, int ratingCount){
+    public Resource(String name, String type, int category, int loanLength,int ratingTotal, int ratingCount){
         this.Name = name;
         this.Type = type;
         this.Category = category;

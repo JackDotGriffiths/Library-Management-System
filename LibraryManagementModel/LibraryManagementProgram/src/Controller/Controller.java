@@ -17,6 +17,7 @@ public class Controller {
     private AdminView adminView = new AdminView(this);
     private ClientView clientView = new ClientView(this);
     
+    public User currentlyLoggedIn;
     UserManager userManager = UserManager.getInstance();
     
     public void Login(String userId,String password){
@@ -33,10 +34,12 @@ public class Controller {
                     case 'A':
                         adminView.setVisible(true);
                         System.out.println("Admin LOGIN");
+                        currentlyLoggedIn = user;
                         break;
                     case 'C':
                         clientView.setVisible(true);
                         System.out.println("Client LOGIN");
+                        currentlyLoggedIn = user;
                         break;
                 }
             }

@@ -51,8 +51,7 @@ public class AdminTest {
         int LoanLength = 14;
         int RatingTotal = 0;
         int RatingCount = 0;
-        Resource instance = new Resource();
-        instance.Resource(InputName, InputType, Category, LoanLength, RatingTotal, RatingCount);
+        Resource instance = new Resource(InputName, InputType, Category, LoanLength, RatingTotal, RatingCount);
         // TODO review the generated test code and remove the default call to fail.
         try{
             assertEquals("Name must be correct",instance.Name,"iPad for Dummies");
