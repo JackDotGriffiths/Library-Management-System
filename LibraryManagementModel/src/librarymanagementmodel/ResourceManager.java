@@ -4,7 +4,6 @@
  * and open the template in the editor.
  */
 package librarymanagementmodel;
-
 import java.util.ArrayList;
 
 /**
@@ -14,7 +13,7 @@ import java.util.ArrayList;
 public class ResourceManager {
     private static ResourceManager single_instance = null;
     
-    public ArrayList<Resource> Resources = new ArrayList<Resource>();
+    private final ArrayList<Resource> Resources = new ArrayList<>();
     
     public static ResourceManager getInstance()
     {
@@ -27,7 +26,7 @@ public class ResourceManager {
         Resources.add(resource);
     }
     
-    public ArrayList<Resource> GetAllResources(){
+    public ArrayList<Resource> getAllResources(){
         return Resources;
     }
     

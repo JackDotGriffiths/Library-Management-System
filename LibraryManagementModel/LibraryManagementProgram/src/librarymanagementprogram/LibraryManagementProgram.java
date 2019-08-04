@@ -22,9 +22,9 @@ public class LibraryManagementProgram {
         // TODO code application logic here
         
         UserManager userManager = UserManager.getInstance();
+        ResourceManager resman = ResourceManager.getInstance();
         
         Controller cont = new Controller();
-        ResourceManager resman = new ResourceManager();
         
         Login login = new Login(cont);
         
@@ -65,7 +65,7 @@ public class LibraryManagementProgram {
         Resource res16 = new Resource("What Good Are the Arts?", "Book", 7, 14, 0, 0);
         Resource res17 = new Resource("1984", "Book", 8, 180, 0, 0);
         Resource res18 = new Resource("Moby Dick","Book",8,14,0,0);
-        Resource res19 = new Resource("SPQR", "Books", 9, 180, 0, 0);
+        Resource res19 = new Resource("SPQR", "Book", 9, 180, 0, 0);
         Resource res20 = new Resource("The Rise and Falls of the Third Reich", "Book", 9, 14, 0, 0);
         
         resman.AddResource(res1);

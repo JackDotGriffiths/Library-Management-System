@@ -12,30 +12,29 @@ import javax.swing.table.*;
  * @author jack-
  */
 public class ClientView extends javax.swing.JFrame {
-    
-   private ResourceManager thisResourceManager; 
+   
    private Controller thisController;
     /**
      * Creates new form ClientView
      */
     public ClientView(Controller controller) {
         thisController = controller;
-        thisResourceManager = ResourceManager.getInstance();
         initComponents();
-        LoadAllResources();
     }
     
-    private void LoadAllResources(){
-        
+    public void LoadAllResources(){
         DefaultTableModel model = (DefaultTableModel) tableResources.getModel();
         
-        
-        for(Resource resource : thisResourceManager.GetAllResources()){
-            
-            System.out.println(resource.Name);
-            model.addRow(new Object[]{resource.Name,resource.Type,resource.Category,resource.Status,resource.LoanLength,resource.RatingTotal/resource.RatingCount});
+        for(Resource resource : ResourceManager.getInstance().getAllResources()){
+            int average;
+            if (resource.RatingCount == 0){
+                average = 0;
+            }
+            else{
+                average = resource.RatingTotal/resource.RatingCount;
+            }
+            model.addRow(new Object[]{resource.Name,resource.Type,resource.Category,resource.Status,resource.LoanLength,average});
         }
-        
         tableResources.setModel(model);
     }
     /**
@@ -47,20 +46,17 @@ public class ClientView extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jTitle = new javax.swing.JLabel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tableResources = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
+        jTitle1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
         setSize(new java.awt.Dimension(800, 600));
-
-        jTitle.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
-        jTitle.setText("Client");
 
         tableResources.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -132,28 +128,34 @@ public class ClientView extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Request", jPanel2);
 
+        jTitle1.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        jTitle1.setText("Client");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(15, 15, 15)
-                        .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 765, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(15, 15, 15)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 765, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(20, Short.MAX_VALUE))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(16, 16, 16)
+                    .addComponent(jTitle1, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(602, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jTitle)
-                .addGap(18, 18, 18)
+                .addGap(56, 56, 56)
                 .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 498, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(46, Short.MAX_VALUE))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(16, 16, 16)
+                    .addComponent(jTitle1)
+                    .addContainerGap(552, Short.MAX_VALUE)))
         );
 
         pack();
@@ -192,7 +194,7 @@ public class ClientView extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JLabel jTitle;
+    private javax.swing.JLabel jTitle1;
     private javax.swing.JTable tableResources;
     // End of variables declaration//GEN-END:variables
 }

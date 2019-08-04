@@ -33,11 +33,13 @@ public class Controller {
                 switch(user.getUniqueID().charAt(0)){
                     case 'A':
                         adminView.setVisible(true);
+                        adminView.LoadAllResources();
                         System.out.println("Admin LOGIN");
                         currentlyLoggedIn = user;
                         break;
                     case 'C':
                         clientView.setVisible(true);
+                        clientView.LoadAllResources();
                         System.out.println("Client LOGIN");
                         currentlyLoggedIn = user;
                         break;
