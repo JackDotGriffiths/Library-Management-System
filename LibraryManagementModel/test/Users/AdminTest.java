@@ -94,7 +94,7 @@ public class AdminTest {
     @Test
     public void testReadRequests() {
         System.out.println("ReadRequests");
-        Admin instance = new Admin();
+        Admin instance = new Admin("A0001", "admin0", "Mike", "Wazowski");
         List<PurchaseRequest> expResult = null;
         List<PurchaseRequest> result = instance.ReadRequests();
         assertEquals(expResult, result);
@@ -109,7 +109,7 @@ public class AdminTest {
     public void testAddRequest() {
         System.out.println("addRequest");
         PurchaseRequest request = null;
-        Admin instance = new Admin();
+        Admin instance = new Admin("A0001", "admin0", "Mike", "Wazowski");
         instance.addRequest(request);
         // TODO review the generated test code and remove the default call to fail.
         fail("Unable to test.");
@@ -123,7 +123,7 @@ public class AdminTest {
         System.out.println("RequestResourceReturn");
         Loan loan = null;
         String date = "";
-        Admin instance = new Admin();
+        Admin instance = new Admin("A0001", "admin0", "Mike", "Wazowski");
         instance.RequestResourceReturn(loan, date);
         // TODO review the generated test code and remove the default call to fail.
         fail("Unable to test.");
@@ -136,7 +136,7 @@ public class AdminTest {
     public void testApproveExtensionRequest() {
         System.out.println("ApproveExtensionRequest");
         ExtensionRequest extensionRequest = null;
-        Admin instance = new Admin();
+        Admin instance = new Admin("A0001", "admin0", "Mike", "Wazowski");
         instance.ApproveExtensionRequest(extensionRequest);
         // TODO review the generated test code and remove the default call to fail.
         fail("Unable to test.");
@@ -149,7 +149,7 @@ public class AdminTest {
     public void testDenyExtensionRequest() {
         System.out.println("DenyExtensionRequest");
         ExtensionRequest extensionRequest = null;
-        Admin instance = new Admin();
+        Admin instance = new Admin("A0001", "admin0", "Mike", "Wazowski");
         instance.DenyExtensionRequest(extensionRequest);
         // TODO review the generated test code and remove the default call to fail.
         fail("Unable to test.");

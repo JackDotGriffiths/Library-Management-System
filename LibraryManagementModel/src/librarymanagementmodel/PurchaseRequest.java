@@ -4,17 +4,27 @@
  * and open the template in the editor.
  */
 package librarymanagementmodel;
-import Users.*;import java.util.ArrayList;
+import Users.*;
+import java.util.ArrayList;
 ;
 
 /**
  *
  * @author jack-
  */
-public abstract class PurchaseRequest {
+public class PurchaseRequest {
     
+    private static PurchaseRequest single_instance = null;
     public String Title;
     private ArrayList<PurchaseRequest> purchaseRequests;
+    
+    public static PurchaseRequest getInstance()
+    {
+        if (single_instance == null) 
+            single_instance = new PurchaseRequest(); 
+  
+        return single_instance;
+    }
     
     public void PurchaseRequest(String title){
         this.Title = title;

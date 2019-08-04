@@ -26,3 +26,5 @@ hs_err_pid*
 /LibraryManagementModel/build/
 /LibraryManagementModel/LibraryManagementProgram/nbproject/private/
 /LibraryManagementModel/LibraryManagementProgram/build/
+/LibraryManagementModel/dist/
+/LibraryManagementModel/LibraryManagementProgram/dist/

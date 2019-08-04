@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package librarymanagementmodel;
+import librarymanagementmodel.ReminderManager;
 import java.util.*;
 /**
  *
@@ -13,13 +14,15 @@ public class Reminder {
     public Loan loan;
     public String SendDate;
     public String ReminderText;
+    
+    ReminderManager reminderManager = ReminderManager.getInstance();
    
     public void Reminder(Loan loanID,String sendDate,String text){
         this.loan = loanID;
         this.SendDate = sendDate;
         this.ReminderText = text;
         
-        ReminderManager reminderManager = new ReminderManager();
+        ReminderManager reminderManager = ReminderManager.getInstance();
         reminderManager.AddReminder(this);
     }
     

@@ -48,7 +48,7 @@ public class ClientTest {
     public void testBorrowItem() {
         System.out.println("BorrowItem");
         Resource resource = null;
-        Client instance = new Client();
+        Client instance = new Client("C0000", "client1", "Jane", "Fonda");
         instance.BorrowItem(resource);
         // TODO review the generated test code and remove the default call to fail.
         fail("Unable to test");
@@ -61,7 +61,7 @@ public class ClientTest {
     public void testReturnItem() {
         System.out.println("ReturnItem");
         Loan loan = null;
-        Client instance = new Client();
+        Client instance = new Client("C0000", "client1", "Jane", "Fonda");
         instance.ReturnItem(loan);
         // TODO review the generated test code and remove the default call to fail.
         fail("Unable to test");
@@ -73,7 +73,7 @@ public class ClientTest {
     @Test
     public void testViewReminders() {
         System.out.println("ViewReminders");
-        Client instance = new Client();
+        Client instance = new Client("C0000", "client1", "Jane", "Fonda");
         List<Reminder> expResult = null;
         List<Reminder> result = instance.ViewReminders();
         assertEquals(expResult, result);
@@ -88,7 +88,7 @@ public class ClientTest {
     public void testRequestResource() {
         System.out.println("RequestResource");
         String text = "";
-        Client instance = new Client();
+        Client instance = new Client("C0000", "client1", "Jane", "Fonda");
         instance.RequestResource(text);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
@@ -102,7 +102,7 @@ public class ClientTest {
         System.out.println("RateResource");
         Resource resource = null;
         int Rating = 0;
-        Client instance = new Client();
+        Client instance = new Client("C0000", "client1", "Jane", "Fonda");
         instance.RateResource(resource, Rating);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
@@ -116,7 +116,7 @@ public class ClientTest {
         System.out.println("RequestExtension");
         Loan loan = null;
         int extensionLength = 0;
-        Client instance = new Client();
+        Client instance = new Client("C0000", "client1", "Jane", "Fonda");
         instance.RequestExtension(loan, extensionLength);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
@@ -128,7 +128,7 @@ public class ClientTest {
     @Test
     public void testListLoans() {
         System.out.println("ListLoans");
-        Client instance = new Client();
+        Client instance = new Client("C0000", "client1", "Jane", "Fonda");
         List<Loan> expResult = null;
         List<Loan> result = instance.ListLoans();
         assertEquals(expResult, result);

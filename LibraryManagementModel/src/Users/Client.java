@@ -47,7 +47,8 @@ public class Client extends User{
     }
     
     public void RequestResource(String text){
-        PurchaseRequest purchaseRequest = new PurchaseRequest();
+        PurchaseRequest purchaseRequest;
+        purchaseRequest = PurchaseRequest.getInstance();
         purchaseRequest.PurchaseRequest(text);
     }
     

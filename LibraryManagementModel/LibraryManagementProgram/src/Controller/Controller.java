@@ -7,17 +7,15 @@ package Controller;
 import librarymanagementmodel.UserManager;
 import Users.*;
 import View.*;
-import javax.swing.JOptionPane;
+import javax.swing.*;
 /**
  *
  * @author jack-
  */
 public class Controller {
     
-    
-    Login login;
-    AdminView adminView;
-    ClientView clientView;
+    private AdminView adminView = new AdminView(this);
+    private ClientView clientView = new ClientView(this);
     
     UserManager userManager = UserManager.getInstance();
     
@@ -30,13 +28,15 @@ public class Controller {
             if (user.getUniqueID().equals(userId) && user.getPassword().equals(password)){
                 correctLogin = true;
                 
+                
                 switch(user.getUniqueID().charAt(0)){
                     case 'A':
-                        adminView = new AdminView(this);
+                        adminView.setVisible(true);
+                        System.out.println("Admin LOGIN");
+                        break;
                     case 'C':
-                        clientView = new ClientView(this);
-                        
-                    default:
+                        clientView.setVisible(true);
+                        System.out.println("Client LOGIN");
                         break;
                 }
             }

@@ -24,7 +24,13 @@ public class Login extends javax.swing.JFrame {
         initComponents();
         thisController = controller;
     }
-
+   
+    
+     public void AddListener(ActionListener actionListen)
+    {
+        btn_LoginButton.addActionListener(actionListen);
+    }
+     
     /**
      * This method is called from within the constructor to start the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -51,9 +57,9 @@ public class Login extends javax.swing.JFrame {
 
         jLabel3.setText("Password");
 
-        txt_UserId.setText("Enter UserID");
+        txt_UserId.setToolTipText("Enter UserID");
 
-        txt_Password.setText("Enter Password");
+        txt_Password.setToolTipText("Enter Password");
 
         btn_LoginButton.setText("LOGIN");
         btn_LoginButton.setName("btn_LoginButton"); // NOI18N
@@ -109,7 +115,8 @@ public class Login extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    
+    
     private void btn_LoginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_LoginButtonActionPerformed
         // TODO add your handling code here:
         thisController.Login(txt_UserId.getText(), txt_Password.getText());

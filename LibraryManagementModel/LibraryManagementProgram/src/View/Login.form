@@ -96,12 +96,12 @@
     </Component>
     <Component class="javax.swing.JTextField" name="txt_UserId">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Enter UserID"/>
+        <Property name="toolTipText" type="java.lang.String" value="Enter UserID"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txt_Password">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Enter Password"/>
+        <Property name="toolTipText" type="java.lang.String" value="Enter Password"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="btn_LoginButton">

@@ -10,7 +10,18 @@ import java.util.*;
  * @author jack-
  */
 public class ReminderManager {
+    
     public List<Reminder> reminders = new ArrayList<Reminder>();
+    
+    private static ReminderManager single_instance = null;
+    
+    public static ReminderManager getInstance()
+    {
+        if (single_instance == null) 
+            single_instance = new ReminderManager(); 
+  
+        return single_instance;
+    }
     
     public void AddReminder(Reminder reminder){
     reminders.add(reminder);
