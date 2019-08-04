@@ -11,14 +11,14 @@ import java.util.ArrayList;
  *
  * @author jack-
  */
-public class User{
+public abstract class User{
     
     protected String uniqueID;
     protected String password;
     protected String givenName;
     protected String surname;
     
-    public void User(String uid,String pass,String name, String surname){
+    public User(String uid,String pass,String name, String surname){
         this.uniqueID = uid;
         this.password = pass;
         this.givenName = name;

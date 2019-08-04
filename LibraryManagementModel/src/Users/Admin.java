@@ -13,6 +13,12 @@ import java.util.*;
  */
 public class Admin extends User{
     
+    
+    public Admin(String uid,String pass,String name, String surname){
+        super(uid,pass,name,surname);
+    }
+    
+    
     private List<PurchaseRequest> purchaseRequests = new ArrayList<PurchaseRequest>();
     public void CreateResource(String InputName, String InputType, int Category, int LoanLength, int RatingTotal, int RatingCount){
         Resource resource = new Resource();

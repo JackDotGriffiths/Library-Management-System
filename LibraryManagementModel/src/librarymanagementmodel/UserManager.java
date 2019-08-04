@@ -14,16 +14,18 @@ import java.util.*;
 public class UserManager {
     
     private static UserManager single_instance = null;
-    private ArrayList<User> users = new ArrayList<User>();  
+    private ArrayList<User> users = new ArrayList<User>(); 
+    
+    
+    private int numAdmin = 0;
+    private int numClient = 0;
     
     public ArrayList<User> getUsers() {
         return users;
     }
      
-     public void NewUser(String uid, String password, String givenName, String surname){
-        User user = new User();
-        user.User(uid, password, surname, surname);
-        
+     public void NewUser(User newUser){ 
+        users.add(newUser);   
     }
      
     public static UserManager getInstance()
@@ -32,5 +34,24 @@ public class UserManager {
             single_instance = new UserManager(); 
   
         return single_instance;
+    }
+    
+    public String generateUserId(char type)
+    {
+        String newID = "";
+        
+        switch(type){
+            case 'A':
+                newID = String.format("A%04d",numAdmin);
+                numAdmin++;
+                break;
+            case 'C':
+                newID = String.format("C%04d",numClient);
+                numClient++;
+                break;
+        }
+        
+        
+        return newID;
     }
 }

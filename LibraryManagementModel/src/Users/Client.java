@@ -13,6 +13,12 @@ import java.util.*;
  * @author jack-
  */
 public class Client extends User{
+    
+    
+    public Client(String uid,String pass,String name, String surname){
+        super(uid,pass,name,surname);
+    }
+    
     private List<Loan> ActiveLoans = new ArrayList<Loan>();
     private List<ExtensionRequest> ActiveExtensionRequests = new ArrayList<ExtensionRequest>();
     
