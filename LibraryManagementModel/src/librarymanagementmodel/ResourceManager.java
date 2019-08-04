@@ -13,7 +13,8 @@ import java.util.ArrayList;
  */
 public class ResourceManager {
     private static ResourceManager single_instance = null;
-    private ArrayList<Resource> Resources = new ArrayList<Resource>();
+    
+    public ArrayList<Resource> Resources = new ArrayList<Resource>();
     
     public static ResourceManager getInstance()
     {

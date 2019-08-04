@@ -6,7 +6,7 @@
 package View;
 import Controller.Controller;
 import librarymanagementmodel.*;
-import javax.swing.table.*
+import javax.swing.table.*;
 /**
  *
  * @author jack-
@@ -27,20 +27,16 @@ public class ClientView extends javax.swing.JFrame {
     
     private void LoadAllResources(){
         
-        DefaultTableModel model = (DefaultTableModel) ResourcesTable.getModel();
+        DefaultTableModel model = (DefaultTableModel) tableResources.getModel();
+        
+        
         for(Resource resource : thisResourceManager.GetAllResources()){
+            
             System.out.println(resource.Name);
-            Vector row = new Vector();
-            row.add(resource.Name);
-            row.add(resource.Type);
-            row.add(resource.Category);
-            row.add(resource.Status);
-            row.add(resource.LoanLength);
-            row.add(resource.RatingTotal/resource.RatingCount);
-            model.addRow(row);
+            model.addRow(new Object[]{resource.Name,resource.Type,resource.Category,resource.Status,resource.LoanLength,resource.RatingTotal/resource.RatingCount});
         }
         
-        ResourcesTable.setModel(model);
+        tableResources.setModel(model);
     }
     /**
      * This method is called from within the constructor to initialise the form.
@@ -51,11 +47,11 @@ public class ClientView extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
+        jTitle = new javax.swing.JLabel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        ResourcesTable = new javax.swing.JTable();
+        tableResources = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
 
@@ -63,10 +59,10 @@ public class ClientView extends javax.swing.JFrame {
         setResizable(false);
         setSize(new java.awt.Dimension(800, 600));
 
-        jLabel1.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
-        jLabel1.setText("Client");
+        jTitle.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        jTitle.setText("Client");
 
-        ResourcesTable.setModel(new javax.swing.table.DefaultTableModel(
+        tableResources.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -89,7 +85,7 @@ public class ClientView extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(ResourcesTable);
+        jScrollPane1.setViewportView(tableResources);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -144,7 +140,7 @@ public class ClientView extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(15, 15, 15)
                         .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 765, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -154,7 +150,7 @@ public class ClientView extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
+                .addComponent(jTitle)
                 .addGap(18, 18, 18)
                 .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 498, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(46, Short.MAX_VALUE))
@@ -189,14 +185,14 @@ public class ClientView extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(ClientView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTable ResourcesTable;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JLabel jTitle;
+    private javax.swing.JTable tableResources;
     // End of variables declaration//GEN-END:variables
 }

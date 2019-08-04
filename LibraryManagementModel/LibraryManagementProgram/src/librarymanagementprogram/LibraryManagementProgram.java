@@ -46,12 +46,7 @@ public class LibraryManagementProgram {
         userManager.NewUser(client3);
         userManager.NewUser(client4);
         userManager.NewUser(client5);
-        
-        
-//        Resource res1 = new Resource("Object Orientated Programming", "Book", 0, 14, 0, 0);
-        
-        
-        
+
         Resource res1 = new Resource("Object Orientated Programming", "Book", 0, 14, 0, 0);
         Resource res2 = new Resource("Beginners guide to Python", "DVD", 0, 180, 0, 0);
         Resource res3 = new Resource("Meditations", "Book", 1, 180, 0, 0);
