@@ -16,8 +16,7 @@ public class ResourceManager {
     private final ArrayList<Resource> Resources = new ArrayList<>();
    
     
-    public static ResourceManager getInstance()
-    {
+    public static ResourceManager getInstance(){
         if (single_instance == null) 
             single_instance = new ResourceManager(); 
         return single_instance;
@@ -40,9 +39,7 @@ public class ResourceManager {
         }
         return availableResources;
     }
-    
-    public String returnCategory(int DewyDecimal)
-    {
+    public String returnCategory(int DewyDecimal){
         String Category = "";
         switch(DewyDecimal){
             case(0):
@@ -95,14 +92,27 @@ public class ResourceManager {
     }
     
     public void updateStatus(Resource resourceToUpdate,String newStatus){
-        resourceToUpdate.Status = newStatus;
         int count = 0;
         for(Resource resource : getAllResources()){
             if(resource == resourceToUpdate){
+                resourceToUpdate.Status = newStatus;
                 Resources.set(count, resourceToUpdate);
             }
             count ++;
         }
+    }
+    
+    public void updateRating(Resource resourceToUpdate,int Rating){
+        int count = 0;
+        for(Resource resource : getAllResources()){
+            if(resource == resourceToUpdate){
+                resourceToUpdate.RatingCount++;
+                resourceToUpdate.RatingTotal= resource.RatingTotal + Rating;
+                Resources.set(count, resourceToUpdate);
+            }
+            count++;
+        }
+        
     }
     
 }

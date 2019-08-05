@@ -23,8 +23,10 @@ public class Controller {
     
     private ArrayList<Loan> Loans = new ArrayList<Loan>();
     
+    
     public User currentlyLoggedIn;
     UserManager userManager = UserManager.getInstance();
+    
     
     public void Login(String userId,String password){
         
