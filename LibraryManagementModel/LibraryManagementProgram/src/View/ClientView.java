@@ -48,6 +48,7 @@ public class ClientView extends javax.swing.JFrame {
         }
         tableResources.setModel(model);
         PopulateActiveLoans();
+        LoadReminders();
     }
     /**
      * This method is called from within the constructor to initialise the form.
@@ -97,6 +98,9 @@ public class ClientView extends javax.swing.JFrame {
         jLabel13 = new javax.swing.JLabel();
         txtResourceRequest = new javax.swing.JTextField();
         btnRequestResource = new javax.swing.JButton();
+        jPanel7 = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tblReminders = new javax.swing.JTable();
         jTitle1 = new javax.swing.JLabel();
         btnLogout = new javax.swing.JButton();
 
@@ -491,6 +495,49 @@ public class ClientView extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Request a Resource", jPanel2);
 
+        tblReminders.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null},
+                {null},
+                {null},
+                {null}
+            },
+            new String [] {
+                "Reminders"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane2.setViewportView(tblReminders);
+        if (tblReminders.getColumnModel().getColumnCount() > 0) {
+            tblReminders.getColumnModel().getColumn(0).setResizable(false);
+        }
+
+        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
+        jPanel7.setLayout(jPanel7Layout);
+        jPanel7Layout.setHorizontalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 751, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanel7Layout.setVerticalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(47, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("Reminders", jPanel7);
+
         jTitle1.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         jTitle1.setText("Client");
 
@@ -540,6 +587,16 @@ public class ClientView extends javax.swing.JFrame {
         for(Loan loan : thisController.getLoansForUser(thisController.currentlyLoggedIn)){
             cmbReturnItem.addItem(loan.resource.Name);
         }
+    }
+    private void LoadReminders(){
+        DefaultTableModel model = (DefaultTableModel) tblReminders.getModel();
+        model.setRowCount(0);
+        for(Reminder reminder : thisController.getReminders()){
+            if(reminder.targetUser == thisController.currentlyLoggedIn){
+                model.addRow(new Object[]{reminder.ReminderText});
+            }
+        } 
+        tblReminders.setModel(model);
     }
     private void cmbBorrowItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbBorrowItemActionPerformed
         // TODO add your handling code here:
@@ -688,7 +745,9 @@ public class ClientView extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel7;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JLabel jTitle1;
     private javax.swing.JLabel lblBalanceDue;
@@ -699,6 +758,7 @@ public class ClientView extends javax.swing.JFrame {
     private javax.swing.JLabel lblType;
     private javax.swing.JSpinner spinnerRating;
     private javax.swing.JTable tableResources;
+    private javax.swing.JTable tblReminders;
     private javax.swing.JTextField txtResourceRequest;
     // End of variables declaration//GEN-END:variables
 }

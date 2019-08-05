@@ -5,6 +5,8 @@
  */
 package View;
 import Controller.Controller;
+import Users.User;
+import java.time.LocalDate;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import librarymanagementmodel.*;
@@ -17,6 +19,7 @@ import librarymanagementmodel.*;
 public class AdminView extends javax.swing.JFrame {
 
     
+    private UserManager userManager = UserManager.getInstance();
     private Controller thisController;
     /**
      * Creates new form AdminView
@@ -420,7 +423,13 @@ public class AdminView extends javax.swing.JFrame {
     private void btnSendNewsletterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSendNewsletterActionPerformed
         // TODO add your handling code here:
         if (txtNewsletterText.getText() != ""){
-            
+            for(User user : userManager.getUsers()){
+                if(user.getUniqueID().charAt(0) == 'C'){
+                    thisController.SendReminder(user, "Newsletter", LocalDate.now(), "NEWSLETTER : " + txtNewsletterText.getText());
+                }
+             }
+            JOptionPane.showMessageDialog(rootPane, "Newsletter Sent Successfully");
+            txtNewsletterText.setText("");
         }
     }//GEN-LAST:event_btnSendNewsletterActionPerformed
 
