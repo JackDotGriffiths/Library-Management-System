@@ -7,6 +7,7 @@ package Controller;
 import librarymanagementmodel.*;
 import Users.*;
 import View.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import javax.swing.*;
 /**
@@ -15,6 +16,7 @@ import javax.swing.*;
  */
 public class Controller {
     
+    private ResourceManager thisResourceManager = ResourceManager.getInstance();
     private AdminView adminView = new AdminView(this);
     private ClientView clientView = new ClientView(this);
     
@@ -55,9 +57,11 @@ public class Controller {
             JOptionPane.showMessageDialog(null, "Incorrect Login", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
-    
-    
-    public void LoanItem(Resource resource){
-        
+
+    public void LoanItem(User user,Resource resource){
+        Loan newLoan = new Loan(user,resource,"Active",LocalDate.now(),resource.LoanLength);
+        Loans.add(newLoan);
+        LocalDate returnDate = LocalDate.now().plusDays(resource.LoanLength);
+        thisResourceManager.updateStatus(resource, "Due :" + returnDate.toString());
     }
 }

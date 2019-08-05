@@ -4,25 +4,25 @@
  * and open the template in the editor.
  */
 package librarymanagementmodel;
+import Users.*;
+import java.time.LocalDate;
 
 /**
  *
  * @author jack-
  */
 public class Loan {
+    public User user;
     public Resource resource;
     public String LoanStatus;
-    public String DateLoaned;
+    public LocalDate DateLoaned;
     public int LoanLength;
     
-    public void Loan(Resource resource,String loanStatus, String dateLoaned,int loanLength){
+    public Loan(User user,Resource resource,String loanStatus, LocalDate dateLoaned,int loanLength){
+        this.user = user;
         this.resource = resource;
         this.LoanStatus = loanStatus;
         this.DateLoaned = dateLoaned;
         this.LoanLength = loanLength;
-    }
-    
-    public void DeactivateLoan(String loanStatus){
-        this.LoanStatus = loanStatus;
     }
 }

@@ -41,31 +41,6 @@ public class ClientTest {
     public void tearDown() {
     }
 
-    /**
-     * Test of BorrowItem method, of class Client.
-     */
-    @Test
-    public void testBorrowItem() {
-        System.out.println("BorrowItem");
-        Resource resource = null;
-        Client instance = new Client("C0000", "client1", "Jane", "Fonda");
-        instance.BorrowItem(resource);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("Unable to test");
-    }
-
-    /**
-     * Test of ReturnItem method, of class Client.
-     */
-    @Test
-    public void testReturnItem() {
-        System.out.println("ReturnItem");
-        Loan loan = null;
-        Client instance = new Client("C0000", "client1", "Jane", "Fonda");
-        instance.ReturnItem(loan);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("Unable to test");
-    }
 
     /**
      * Test of ViewReminders method, of class Client.

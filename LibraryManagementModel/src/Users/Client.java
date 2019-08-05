@@ -22,24 +22,7 @@ public class Client extends User{
     private List<Loan> ActiveLoans = new ArrayList<Loan>();
     private List<ExtensionRequest> ActiveExtensionRequests = new ArrayList<ExtensionRequest>();
     
-    public void BorrowItem(Resource resource){
-        if (resource.Status == "Available"){
-            Loan loan = new Loan();
-            loan.Loan(resource,"Active",LocalDate.now().toString() , resource.LoanLength);
-            resource.Status = "Unavailable";
-            ActiveLoans.add(loan);
-        }
-    }
     
-    public void ReturnItem(Loan loan){
-        //Finds the specified loan and removes it from ActiveLoans List
-        for(Loan activeloan: ActiveLoans){
-            if (activeloan == loan){
-                ActiveLoans.remove(activeloan);
-            }
-        }
-        loan.DeactivateLoan("Inactive");
-    }
     
     public List<Reminder> ViewReminders(){
         ReminderManager reminderManager = new ReminderManager();
