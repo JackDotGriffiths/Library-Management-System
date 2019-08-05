@@ -4,26 +4,25 @@
  * and open the template in the editor.
  */
 package librarymanagementmodel;
-import librarymanagementmodel.ReminderManager;
+import Users.User;
+import java.time.LocalDate;
 import java.util.*;
 /**
  *
  * @author jack-
  */
 public class Reminder {
-    public Loan loan;
-    public String SendDate;
+    public User targetUser;
+    public String Type;
+    public LocalDate SendDate;
     public String ReminderText;
     
-    ReminderManager reminderManager = ReminderManager.getInstance();
    
-    public void Reminder(Loan loanID,String sendDate,String text){
-        this.loan = loanID;
+    public Reminder(User user,String type,LocalDate sendDate,String text){
+        this.targetUser = user;
+        this.Type = type;
         this.SendDate = sendDate;
         this.ReminderText = text;
-        
-        ReminderManager reminderManager = ReminderManager.getInstance();
-        reminderManager.AddReminder(this);
     }
     
     

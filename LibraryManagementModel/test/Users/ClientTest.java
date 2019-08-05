@@ -42,33 +42,9 @@ public class ClientTest {
     }
 
 
-    /**
-     * Test of ViewReminders method, of class Client.
-     */
-    @Test
-    public void testViewReminders() {
-        System.out.println("ViewReminders");
-        Client instance = new Client("C0000", "client1", "Jane", "Fonda");
-        List<Reminder> expResult = null;
-        List<Reminder> result = instance.ViewReminders();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("Unable to test");
-    }
 
-    /**
-     * Test of RequestResource method, of class Client.
-     */
-    @Test
-    public void testRequestResource() {
-        System.out.println("RequestResource");
-        String text = "";
-        Client instance = new Client("C0000", "client1", "Jane", "Fonda");
-        instance.RequestResource(text);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
 
+ 
     /**
      * Test of RateResource method, of class Client.
      */

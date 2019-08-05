@@ -66,67 +66,8 @@ public class AdminTest {
         //Ensures instance is created as expected. Data validation will occur through GUI.
     }
 
-    /**
-     * Test of SendReminder method, of class Admin.
-     */
-    @Test
-    public void testSendReminder() {
-        System.out.println("SendReminder");
-        Loan loan = null;
-        String date = "25-05-2019";
-        String text = "Please return your copy of iPad for Dummies.";
-        Reminder instance = new Reminder();
-        instance.Reminder(loan, date, text);
-        // TODO review the generated test code and remove the default call to fail.
-        try{
-            //Unable to generate a Loan and Hence unable to test. 
-            assertEquals("Date must be correct",instance.SendDate,"25-05-2019");
-            assertEquals("Text must be correct",instance.ReminderText,"Please return your copy of iPad for Dummies.");    
-        }catch(Exception e){
-            fail("ERROR: " + e);
-        }   
-    }
 
-    /**
-     * Test of ReadRequests method, of class Admin.
-     */
-    @Test
-    public void testReadRequests() {
-        System.out.println("ReadRequests");
-        Admin instance = new Admin("A0001", "admin0", "Mike", "Wazowski");
-        List<PurchaseRequest> expResult = null;
-        List<PurchaseRequest> result = instance.ReadRequests();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("Unable to test.");
-    }
 
-    /**
-     * Test of addRequest method, of class Admin.
-     */
-    @Test
-    public void testAddRequest() {
-        System.out.println("addRequest");
-        PurchaseRequest request = null;
-        Admin instance = new Admin("A0001", "admin0", "Mike", "Wazowski");
-        instance.addRequest(request);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("Unable to test.");
-    }
-
-    /**
-     * Test of RequestResourceReturn method, of class Admin.
-     */
-    @Test
-    public void testRequestResourceReturn() {
-        System.out.println("RequestResourceReturn");
-        Loan loan = null;
-        String date = "";
-        Admin instance = new Admin("A0001", "admin0", "Mike", "Wazowski");
-        instance.RequestResourceReturn(loan, date);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("Unable to test.");
-    }
 
     /**
      * Test of ApproveExtensionRequest method, of class Admin.

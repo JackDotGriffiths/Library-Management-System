@@ -36,20 +36,5 @@ public class ReminderTest {
     @After
     public void tearDown() {
     }
-
-    /**
-     * Test of Reminder method, of class Reminder.
-     */
-    @Test
-    public void testReminder() {
-        System.out.println("Reminder");
-        Loan loanID = null;
-        String sendDate = "";
-        String text = "";
-        Reminder instance = new Reminder();
-        instance.Reminder(loanID, sendDate, text);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
     
 }

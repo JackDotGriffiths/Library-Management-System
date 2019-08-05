@@ -22,18 +22,7 @@ public class Client extends User{
     private List<Loan> ActiveLoans = new ArrayList<Loan>();
     private List<ExtensionRequest> ActiveExtensionRequests = new ArrayList<ExtensionRequest>();
     
-    
-    
-    public List<Reminder> ViewReminders(){
-        ReminderManager reminderManager = new ReminderManager();
-        return reminderManager.reminders;
-    }
-    
-    public void RequestResource(String text){
-        PurchaseRequest purchaseRequest;
-        purchaseRequest = PurchaseRequest.getInstance();
-        purchaseRequest.PurchaseRequest(text);
-    }
+   
     
     public void RateResource(Resource resource, int Rating){
         resource.RatingCount += 1;

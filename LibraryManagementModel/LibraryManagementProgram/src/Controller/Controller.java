@@ -22,7 +22,7 @@ public class Controller {
     Login login;
     
     private ArrayList<Loan> Loans = new ArrayList<Loan>();
-    
+    private ArrayList<Reminder> Reminders = new ArrayList<Reminder>(); 
     
     public User currentlyLoggedIn;
     UserManager userManager = UserManager.getInstance();
@@ -38,18 +38,18 @@ public class Controller {
                 correctLogin = true;      
                 switch(user.getUniqueID().charAt(0)){
                     case 'A':
+                        currentlyLoggedIn = user;
                         adminView = new AdminView(this);
                         adminView.setVisible(true);
                         adminView.LoadAllResources();
                         System.out.println("Admin LOGIN");
-                        currentlyLoggedIn = user;
                         break;
                     case 'C':
+                        currentlyLoggedIn = user;
                         clientView = new ClientView(this);
                         clientView.setVisible(true);
                         clientView.LoadAllResources();
                         System.out.println("Client LOGIN");
-                        currentlyLoggedIn = user;
                         break;
                     default:
                         break;
@@ -63,6 +63,7 @@ public class Controller {
     }
     
     public void Logout(){
+        currentlyLoggedIn = null;
         login.setVisible(true);
     }
 
@@ -84,8 +85,7 @@ public class Controller {
         }  
         return listLoans;
     }
-    
-    
+ 
     public void ReturnItem(Loan returnLoan){
         returnLoan.LoanStatus = "Disabled";
         
@@ -99,6 +99,14 @@ public class Controller {
         }
         //Change Resource to be available
         thisResourceManager.updateStatus(returnLoan.resource, "Available");
+    }
+    
+    public void SendReminder(User user, String type,LocalDate date,String message){ 
+        Reminder newReminder = new Reminder(user,type,date,message);
+        Reminders.add(newReminder);
+    }
+    public ArrayList<Reminder> getReminders(){
+        return Reminders;
     }
     
 }

@@ -7,7 +7,6 @@ package View;
 import Controller.Controller;
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
-import librarymanagementmodel.ReminderManager;
 
 /**
  *

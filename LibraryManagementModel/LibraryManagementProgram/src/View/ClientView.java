@@ -5,6 +5,7 @@
  */
 package View;
 import Controller.Controller;
+import Users.User;
 import java.time.LocalDate;
 import static java.time.temporal.ChronoUnit.DAYS;
 import javax.swing.DefaultComboBoxModel;
@@ -19,6 +20,7 @@ public class ClientView extends javax.swing.JFrame {
    
    private ResourceManager thisResourceManager = ResourceManager.getInstance();
    private Controller thisController;
+   private UserManager userManager = UserManager.getInstance();
     /**
      * Creates new form ClientView
      */
@@ -90,6 +92,11 @@ public class ClientView extends javax.swing.JFrame {
         lblDaysRemaining = new javax.swing.JLabel();
         lblBalanceDue = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
+        jPanel6 = new javax.swing.JPanel();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        txtResourceRequest = new javax.swing.JTextField();
+        btnRequestResource = new javax.swing.JButton();
         jTitle1 = new javax.swing.JLabel();
         btnLogout = new javax.swing.JButton();
 
@@ -379,9 +386,9 @@ public class ClientView extends javax.swing.JFrame {
                     .addComponent(lblDaysRemaining)
                     .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, Short.MAX_VALUE)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblBalanceDue)
-                    .addComponent(jLabel2))
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2)
+                    .addComponent(lblBalanceDue))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnReturnItem, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18))
@@ -415,18 +422,74 @@ public class ClientView extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Borrow/Return and Rate Resources", jPanel1);
 
+        jPanel6.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        jLabel12.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
+        jLabel12.setText("Request a Resource");
+
+        jLabel13.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jLabel13.setText("Resource Title");
+
+        txtResourceRequest.setToolTipText("Enter Resource Title");
+
+        btnRequestResource.setText("REQUEST RESOURCE");
+        btnRequestResource.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRequestResourceActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
+        jPanel6.setLayout(jPanel6Layout);
+        jPanel6Layout.setHorizontalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addGap(198, 198, 198)
+                        .addComponent(jLabel12))
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addGap(113, 113, 113)
+                        .addComponent(jLabel13)
+                        .addGap(35, 35, 35)
+                        .addComponent(txtResourceRequest, javax.swing.GroupLayout.PREFERRED_SIZE, 315, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addGap(256, 256, 256)
+                        .addComponent(btnRequestResource, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(134, Short.MAX_VALUE))
+        );
+        jPanel6Layout.setVerticalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(31, 31, 31)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtResourceRequest, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(btnRequestResource)
+                .addContainerGap(293, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 763, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(20, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 472, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(22, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("Request", jPanel2);
+        jTabbedPane1.addTab("Request a Resource", jPanel2);
 
         jTitle1.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         jTitle1.setText("Client");
@@ -447,12 +510,12 @@ public class ClientView extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 765, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnLogout, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(334, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(16, 16, 16)
                     .addComponent(jTitle1, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(916, Short.MAX_VALUE)))
+                    .addContainerGap(588, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -461,12 +524,12 @@ public class ClientView extends javax.swing.JFrame {
                 .addComponent(btnLogout)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 498, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(322, Short.MAX_VALUE))
+                .addContainerGap(29, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(16, 16, 16)
                     .addComponent(jTitle1)
-                    .addContainerGap(828, Short.MAX_VALUE)))
+                    .addContainerGap(535, Short.MAX_VALUE)))
         );
 
         pack();
@@ -555,6 +618,19 @@ public class ClientView extends javax.swing.JFrame {
         LoadAllResources();
     }//GEN-LAST:event_btnSubmitRatingActionPerformed
 
+    private void btnRequestResourceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRequestResourceActionPerformed
+        // TODO add your handling code here:
+        if (txtResourceRequest.getText()!= ""){
+             for(User user : userManager.getUsers()){
+                if(user.getUniqueID().charAt(0) == 'A'){
+                    thisController.SendReminder(user, "PurchaseRequest", LocalDate.now(), txtResourceRequest.getText());
+                }
+             }
+            JOptionPane.showMessageDialog(rootPane, "Request Sent Successfully");
+            txtResourceRequest.setText("");
+        }
+    }//GEN-LAST:event_btnRequestResourceActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -585,6 +661,7 @@ public class ClientView extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnLoanItem;
     private javax.swing.JButton btnLogout;
+    private javax.swing.JButton btnRequestResource;
     private javax.swing.JButton btnReturnItem;
     private javax.swing.JButton btnSubmitRating;
     private javax.swing.JComboBox<String> cmbBorrowItem;
@@ -594,6 +671,8 @@ public class ClientView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -608,6 +687,7 @@ public class ClientView extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JLabel jTitle1;
@@ -619,5 +699,6 @@ public class ClientView extends javax.swing.JFrame {
     private javax.swing.JLabel lblType;
     private javax.swing.JSpinner spinnerRating;
     private javax.swing.JTable tableResources;
+    private javax.swing.JTextField txtResourceRequest;
     // End of variables declaration//GEN-END:variables
 }
