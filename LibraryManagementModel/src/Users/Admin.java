@@ -21,10 +21,6 @@ public class Admin extends User{
     
     private List<PurchaseRequest> purchaseRequests = new ArrayList<PurchaseRequest>();
     
-    public void CreateResource(String InputName, String InputType, int Category, int LoanLength, int RatingTotal, int RatingCount){
-        Resource newRes = new Resource(InputName,InputType,Category,LoanLength,RatingTotal,RatingCount);
-        ResourceManager.getInstance().AddResource(newRes);
-    }
     
     public void SendReminder(Loan loan, String date,String text){
         Reminder reminder = new Reminder();

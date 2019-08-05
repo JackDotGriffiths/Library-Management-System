@@ -4,9 +4,10 @@
  * and open the template in the editor.
  */
 package Controller;
-import librarymanagementmodel.UserManager;
+import librarymanagementmodel.*;
 import Users.*;
 import View.*;
+import java.util.ArrayList;
 import javax.swing.*;
 /**
  *
@@ -16,6 +17,9 @@ public class Controller {
     
     private AdminView adminView = new AdminView(this);
     private ClientView clientView = new ClientView(this);
+    
+    
+    private ArrayList<Loan> Loans = new ArrayList<Loan>();
     
     public User currentlyLoggedIn;
     UserManager userManager = UserManager.getInstance();
@@ -50,5 +54,10 @@ public class Controller {
         {
             JOptionPane.showMessageDialog(null, "Incorrect Login", "Error", JOptionPane.ERROR_MESSAGE);
         }
+    }
+    
+    
+    public void LoanItem(Resource resource){
+        
     }
 }
