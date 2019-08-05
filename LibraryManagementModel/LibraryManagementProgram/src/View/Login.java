@@ -7,6 +7,7 @@ package View;
 import Controller.Controller;
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
+import librarymanagementmodel.ReminderManager;
 
 /**
  *
@@ -15,6 +16,7 @@ import javax.swing.JOptionPane;
 public class Login extends javax.swing.JFrame {
 
     private Controller thisController;
+    private static Login single_instance = null;
     
     /**
      * Creates new form Login
@@ -24,9 +26,8 @@ public class Login extends javax.swing.JFrame {
         initComponents();
         thisController = controller;
     }
-   
     
-     public void AddListener(ActionListener actionListen)
+    public void AddListener(ActionListener actionListen)
     {
         btn_LoginButton.addActionListener(actionListen);
     }

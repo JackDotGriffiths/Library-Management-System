@@ -15,7 +15,7 @@ public class Resource {
     public String Type;
     public int Category;
     public int LoanLength;
-    public String Status = "Available";
+    public String Status;
     public int RatingTotal;
     public int RatingCount;
     
@@ -24,7 +24,15 @@ public class Resource {
         this.Name = name;
         this.Type = type;
         this.Category = category;
+        if(loanLength == 0){
+            this.Status = "Reference";
+        }else{
+            this.Status = "Available";
+        }
+        
+             
         this.LoanLength = loanLength;
+        
         this.RatingTotal = ratingTotal;
         this.RatingCount = ratingCount;
     }
