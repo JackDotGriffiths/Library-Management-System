@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ClassDiagram name="LibraryManagementModel">
+  <ClassDiagramComponents>
+    <Class name="ExtensionRequest" package="librarymanagementmodel" visibility="public" xPosition="20.0" yPosition="20.0">
+      <Fields>
+        <Field name="loan" type="Loan" visibility="public"/>
+        <Field name="ExtensionLength" type="int" visibility="public"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="Loan" name="loan"/>
+          <Argument type="int" name="extensionLength"/>
+        </Constructor>
+      </Constructors>
+      <Methods/>
+    </Class>
+    <Class name="LibraryManagementModel" package="librarymanagementmodel" visibility="public" xPosition="320.0" yPosition="20.0">
+      <Fields/>
+      <Constructors/>
+      <Methods>
+        <Method name="main" returnType="void" visibility="public" isStatic="true">
+          <Argument type="String[]" name="args"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="Loan" package="librarymanagementmodel" visibility="public" xPosition="620.0" yPosition="20.0">
+      <Fields>
+        <Field name="user" type="User" visibility="public"/>
+        <Field name="resource" type="Resource" visibility="public"/>
+        <Field name="LoanStatus" type="String" visibility="public"/>
+        <Field name="DateLoaned" type="LocalDate" visibility="public"/>
+        <Field name="LoanLength" type="int" visibility="public"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="User" name="user"/>
+          <Argument type="Resource" name="resource"/>
+          <Argument type="String" name="loanStatus"/>
+          <Argument type="LocalDate" name="dateLoaned"/>
+          <Argument type="int" name="loanLength"/>
+        </Constructor>
+      </Constructors>
+      <Methods/>
+    </Class>
+    <Class name="Reminder" package="librarymanagementmodel" visibility="public" xPosition="920.0" yPosition="20.0">
+      <Fields>
+        <Field name="targetUser" type="User" visibility="public"/>
+        <Field name="Type" type="String" visibility="public"/>
+        <Field name="SendDate" type="LocalDate" visibility="public"/>
+        <Field name="ReminderText" type="String" visibility="public"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="User" name="user"/>
+          <Argument type="String" name="type"/>
+          <Argument type="LocalDate" name="sendDate"/>
+          <Argument type="String" name="text"/>
+        </Constructor>
+      </Constructors>
+      <Methods/>
+    </Class>
+    <Class name="Resource" package="librarymanagementmodel" visibility="public" xPosition="1220.0" yPosition="20.0">
+      <Fields>
+        <Field name="Name" type="String" visibility="public"/>
+        <Field name="Type" type="String" visibility="public"/>
+        <Field name="Category" type="int" visibility="public"/>
+        <Field name="LoanLength" type="int" visibility="public"/>
+        <Field name="Status" type="String" visibility="public"/>
+        <Field name="RatingTotal" type="int" visibility="public"/>
+        <Field name="RatingCount" type="int" visibility="public"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="String" name="name"/>
+          <Argument type="String" name="type"/>
+          <Argument type="int" name="category"/>
+          <Argument type="int" name="loanLength"/>
+          <Argument type="int" name="ratingTotal"/>
+          <Argument type="int" name="ratingCount"/>
+        </Constructor>
+      </Constructors>
+      <Methods/>
+    </Class>
+    <Class name="ResourceManager" package="librarymanagementmodel" visibility="public" xPosition="1520.0" yPosition="20.0">
+      <Fields>
+        <Field name="single_instance" type="ResourceManager" visibility="private" isStatic="true"/>
+        <Field name="Resources" type="ArrayList&lt;Resource&gt;" visibility="private" isFinal="true"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="getInstance" returnType="ResourceManager" visibility="public" isStatic="true"/>
+        <Method name="AddResource" returnType="void" visibility="public">
+          <Argument type="Resource" name="resource"/>
+        </Method>
+        <Method name="getAllResources" returnType="ArrayList&lt;Resource&gt;" visibility="public"/>
+        <Method name="getAvailableResources" returnType="ArrayList&lt;Resource&gt;" visibility="public"/>
+        <Method name="returnCategory" returnType="String" visibility="public">
+          <Argument type="int" name="DewyDecimal"/>
+        </Method>
+        <Method name="returnLoanLength" returnType="String" visibility="public">
+          <Argument type="int" name="loanDays"/>
+        </Method>
+        <Method name="updateStatus" returnType="void" visibility="public">
+          <Argument type="Resource" name="resourceToUpdate"/>
+          <Argument type="String" name="newStatus"/>
+        </Method>
+        <Method name="updateRating" returnType="void" visibility="public">
+          <Argument type="Resource" name="resourceToUpdate"/>
+          <Argument type="int" name="Rating"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="UserManager" package="librarymanagementmodel" visibility="public" xPosition="1820.0" yPosition="20.0">
+      <Fields>
+        <Field name="single_instance" type="UserManager" visibility="private" isStatic="true"/>
+        <Field name="users" type="ArrayList&lt;User&gt;" visibility="private"/>
+        <Field name="numAdmin" type="int" visibility="private"/>
+        <Field name="numClient" type="int" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="getUsers" returnType="ArrayList&lt;User&gt;" visibility="public"/>
+        <Method name="NewUser" returnType="void" visibility="public">
+          <Argument type="User" name="newUser"/>
+        </Method>
+        <Method name="getInstance" returnType="UserManager" visibility="public" isStatic="true"/>
+        <Method name="generateUserId" returnType="String" visibility="public">
+          <Argument type="char" name="type"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="Admin" package="Users" visibility="public" xPosition="2120.0" yPosition="20.0">
+      <Fields/>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="String" name="uid"/>
+          <Argument type="String" name="pass"/>
+          <Argument type="String" name="name"/>
+          <Argument type="String" name="surname"/>
+        </Constructor>
+      </Constructors>
+      <Methods/>
+    </Class>
+    <Class name="Client" package="Users" visibility="public" xPosition="20.0" yPosition="420.0">
+      <Fields>
+        <Field name="ActiveLoans" type="List&lt;Loan&gt;" visibility="private"/>
+        <Field name="ActiveExtensionRequests" type="List&lt;ExtensionRequest&gt;" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="String" name="uid"/>
+          <Argument type="String" name="pass"/>
+          <Argument type="String" name="name"/>
+          <Argument type="String" name="surname"/>
+        </Constructor>
+      </Constructors>
+      <Methods/>
+    </Class>
+    <Class name="User" package="Users" visibility="public" isAbstract="true" xPosition="320.0" yPosition="420.0">
+      <Fields>
+        <Field name="uniqueID" type="String" visibility="protected"/>
+        <Field name="password" type="String" visibility="protected"/>
+        <Field name="givenName" type="String" visibility="protected"/>
+        <Field name="surname" type="String" visibility="protected"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="String" name="uid"/>
+          <Argument type="String" name="pass"/>
+          <Argument type="String" name="name"/>
+          <Argument type="String" name="surname"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="setUniqueID" returnType="void" visibility="public">
+          <Argument type="String" name="ID"/>
+        </Method>
+        <Method name="getUniqueID" returnType="String" visibility="public"/>
+        <Method name="getPassword" returnType="String" visibility="public"/>
+        <Method name="getName" returnType="String" visibility="public"/>
+      </Methods>
+    </Class>
+  </ClassDiagramComponents>
+  <ClassDiagramRelations>
+    <HasRelation name="ActiveLoans" source="Users.Client" target="librarymanagementmodel.Loan" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="List&lt;Loan&gt;"/>
+    <IsRelation name="is" source="Users.Admin" target="Users.User"/>
+    <UseRelation source="librarymanagementmodel.ResourceManager" target="librarymanagementmodel.ResourceManager" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="resource" source="librarymanagementmodel.Loan" target="librarymanagementmodel.Resource" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="Resources" source="librarymanagementmodel.ResourceManager" target="librarymanagementmodel.Resource" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="ArrayList&lt;Resource&gt;"/>
+    <HasRelation name="loan" source="librarymanagementmodel.ExtensionRequest" target="librarymanagementmodel.Loan" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="user" source="librarymanagementmodel.Loan" target="Users.User" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="librarymanagementmodel.ResourceManager" target="librarymanagementmodel.Resource" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="targetUser" source="librarymanagementmodel.Reminder" target="Users.User" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="users" source="librarymanagementmodel.UserManager" target="Users.User" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="ArrayList&lt;User&gt;"/>
+    <HasRelation name="ActiveExtensionRequests" source="Users.Client" target="librarymanagementmodel.ExtensionRequest" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="List&lt;ExtensionRequest&gt;"/>
+    <HasRelation name="single_instance" source="librarymanagementmodel.ResourceManager" target="librarymanagementmodel.ResourceManager" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <IsRelation name="is" source="Users.Client" target="Users.User"/>
+    <UseRelation source="librarymanagementmodel.UserManager" target="Users.User" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="single_instance" source="librarymanagementmodel.UserManager" target="librarymanagementmodel.UserManager" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+  </ClassDiagramRelations>
+</ClassDiagram>
