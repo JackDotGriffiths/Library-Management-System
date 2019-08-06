@@ -18,26 +18,5 @@ public class Admin extends User{
         super(uid,pass,name,surname);
     }
     
-  
-   
-    
-    public void ApproveExtensionRequest(ExtensionRequest extensionRequest){
-        try{
-            extensionRequest.Status = "Approved";
-            extensionRequest.loan.resource.LoanLength = extensionRequest.loan.resource.LoanLength + extensionRequest.ExtensionLength;
-        }
-       catch (Exception e){
-           System.out.println("ERROR: " + e);
-       }
-    }
-    
-    public void DenyExtensionRequest(ExtensionRequest extensionRequest){
-        try{
-            extensionRequest.Status = "Rejected";
-        }
-        catch (Exception e){
-           System.out.println("ERROR: " + e);
-       }
-    }
     
 }

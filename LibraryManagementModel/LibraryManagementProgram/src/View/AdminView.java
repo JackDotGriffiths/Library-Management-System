@@ -20,6 +20,7 @@ public class AdminView extends javax.swing.JFrame {
 
     
     private UserManager userManager = UserManager.getInstance();
+    private ResourceManager thisResourceManager = ResourceManager.getInstance();
     private Controller thisController;
     /**
      * Creates new form AdminView
@@ -46,8 +47,15 @@ public class AdminView extends javax.swing.JFrame {
         }
         tableResources.setModel(model);
         UpdateResourceRequests();
+        PopulateActiveLoans();
+        PopulateExtensionRequests();
     }
-     
+    public void PopulateActiveLoans(){ 
+        cmbReturnsList.removeAllItems();
+        for(Loan loan : thisController.getActiveLoans()){
+            cmbReturnsList.addItem(loan.resource.Name);
+        }
+    }
     public void UpdateResourceRequests(){
         DefaultTableModel model = (DefaultTableModel) tblResourceRequests.getModel();
         model.setRowCount(0);
@@ -57,6 +65,18 @@ public class AdminView extends javax.swing.JFrame {
             }
         } 
         tblResourceRequests.setModel(model);
+    }
+    public void PopulateExtensionRequests(){
+        DefaultTableModel model = (DefaultTableModel) tblExtensionRequests.getModel();
+        model.setRowCount(0); 
+        for(ExtensionRequest extReq: thisController.getExtensionRequests()){
+            Loan activeLoan = extReq.loan;
+            LocalDate currentDueDate = activeLoan.DateLoaned.plusDays(activeLoan.LoanLength);
+            LocalDate newDueDate = currentDueDate.plusDays(extReq.ExtensionLength);
+            
+            model.addRow(new Object[]{activeLoan.resource.Name,activeLoan.user.getUniqueID(),extReq.ExtensionLength,currentDueDate,newDueDate});
+        }
+        tblExtensionRequests.setModel(model);
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -91,6 +111,33 @@ public class AdminView extends javax.swing.JFrame {
         txtNewsletterText = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
         btnSendNewsletter = new javax.swing.JButton();
+        jPanel6 = new javax.swing.JPanel();
+        jPanel7 = new javax.swing.JPanel();
+        jLabel15 = new javax.swing.JLabel();
+        jLabel17 = new javax.swing.JLabel();
+        jLabel18 = new javax.swing.JLabel();
+        ftxtDate = new javax.swing.JFormattedTextField();
+        cmbReturnsList = new javax.swing.JComboBox<>();
+        txtMessage = new javax.swing.JTextField();
+        btnSubmitReminder = new javax.swing.JButton();
+        jLabel19 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        jLabel21 = new javax.swing.JLabel();
+        jPanel8 = new javax.swing.JPanel();
+        jLabel20 = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
+        jLabel22 = new javax.swing.JLabel();
+        jLabel23 = new javax.swing.JLabel();
+        jLabel24 = new javax.swing.JLabel();
+        chbxWeek = new javax.swing.JCheckBox();
+        chbxOverdue = new javax.swing.JCheckBox();
+        chbxBlock = new javax.swing.JCheckBox();
+        jPanel9 = new javax.swing.JPanel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        tblExtensionRequests = new javax.swing.JTable();
+        jLabel25 = new javax.swing.JLabel();
+        btnDeny = new javax.swing.JButton();
+        btnApprove = new javax.swing.JButton();
         btnLogout1 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
 
@@ -331,6 +378,299 @@ public class AdminView extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Send a Newsletter", jPanel5);
 
+        jPanel7.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        jLabel15.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
+        jLabel15.setText("Return Reminders");
+
+        jLabel17.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel17.setText("Message");
+
+        jLabel18.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel18.setText("Reminder Send Date");
+
+        ftxtDate.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("yyyy-MM-dd"))));
+        ftxtDate.setToolTipText("Date to send the reminder.");
+
+        txtMessage.setToolTipText("Enter the message you wish to send on this date.");
+
+        btnSubmitReminder.setText("Submit Reminder");
+        btnSubmitReminder.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSubmitReminderActionPerformed(evt);
+            }
+        });
+
+        jLabel19.setText("format : yyyy-MM-dd");
+
+        jButton1.setText("TODAY");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jLabel21.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel21.setText("Active Loan");
+
+        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
+        jPanel7.setLayout(jPanel7Layout);
+        jPanel7Layout.setHorizontalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
+                .addContainerGap(24, Short.MAX_VALUE)
+                .addComponent(jLabel15)
+                .addGap(19, 19, 19))
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel7Layout.createSequentialGroup()
+                            .addGap(82, 82, 82)
+                            .addComponent(btnSubmitReminder, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel7Layout.createSequentialGroup()
+                            .addComponent(jLabel17)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(txtMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel19)
+                            .addComponent(jLabel18))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(ftxtDate)
+                            .addComponent(cmbReturnsList, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel7Layout.createSequentialGroup()
+                    .addGap(16, 16, 16)
+                    .addComponent(jLabel21)
+                    .addContainerGap(253, Short.MAX_VALUE)))
+        );
+        jPanel7Layout.setVerticalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(32, 32, 32)
+                .addComponent(cmbReturnsList, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(13, 13, 13)
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel18)
+                    .addComponent(ftxtDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton1)
+                    .addComponent(jLabel19))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtMessage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnSubmitReminder)
+                .addContainerGap(88, Short.MAX_VALUE))
+            .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel7Layout.createSequentialGroup()
+                    .addGap(78, 78, 78)
+                    .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(237, Short.MAX_VALUE)))
+        );
+
+        jPanel8.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        jLabel20.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
+        jLabel20.setText("Overdue Reminders");
+
+        jLabel16.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel16.setText("Overdue Reminders");
+
+        jLabel22.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel22.setText("Turn On/Off Automatic Reminders");
+
+        jLabel23.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel23.setText("Week Before Due Date");
+
+        jLabel24.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel24.setText("20 Days Overdue [Account Block]");
+
+        chbxWeek.setText("On/Off");
+        chbxWeek.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chbxWeekActionPerformed(evt);
+            }
+        });
+
+        chbxOverdue.setText("On/Off");
+        chbxOverdue.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chbxOverdueActionPerformed(evt);
+            }
+        });
+
+        chbxBlock.setText("On/Off");
+        chbxBlock.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chbxBlockActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
+        jPanel8.setLayout(jPanel8Layout);
+        jPanel8Layout.setHorizontalGroup(
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel8Layout.createSequentialGroup()
+                .addGap(24, 24, 24)
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel8Layout.createSequentialGroup()
+                        .addComponent(jLabel23)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(chbxWeek))
+                    .addGroup(jPanel8Layout.createSequentialGroup()
+                        .addComponent(jLabel16)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(chbxOverdue))
+                    .addGroup(jPanel8Layout.createSequentialGroup()
+                        .addComponent(jLabel20)
+                        .addGap(0, 18, Short.MAX_VALUE))
+                    .addGroup(jPanel8Layout.createSequentialGroup()
+                        .addComponent(jLabel24)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(chbxBlock)))
+                .addContainerGap())
+            .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
+                    .addContainerGap(87, Short.MAX_VALUE)
+                    .addComponent(jLabel22)
+                    .addGap(65, 65, 65)))
+        );
+        jPanel8Layout.setVerticalGroup(
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel8Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(62, 62, 62)
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel23)
+                    .addComponent(chbxWeek))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel16)
+                    .addComponent(chbxOverdue))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel24)
+                    .addComponent(chbxBlock))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel8Layout.createSequentialGroup()
+                    .addGap(58, 58, 58)
+                    .addComponent(jLabel22)
+                    .addContainerGap(274, Short.MAX_VALUE)))
+        );
+
+        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
+        jPanel6.setLayout(jPanel6Layout);
+        jPanel6Layout.setHorizontalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanel6Layout.setVerticalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(111, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("Automated Reminders", jPanel6);
+
+        tblExtensionRequests.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Resource Name", "UserID", "Extension Length", "Current Due Date", "New Due Date"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane3.setViewportView(tblExtensionRequests);
+
+        jLabel25.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel25.setText("Select a row and click Approve/Deny to respond");
+
+        btnDeny.setText("DENY");
+        btnDeny.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDenyActionPerformed(evt);
+            }
+        });
+
+        btnApprove.setText("APPROVE");
+        btnApprove.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnApproveActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
+        jPanel9.setLayout(jPanel9Layout);
+        jPanel9Layout.setHorizontalGroup(
+            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel9Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel9Layout.createSequentialGroup()
+                        .addComponent(jScrollPane3)
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel9Layout.createSequentialGroup()
+                        .addGap(0, 211, Short.MAX_VALUE)
+                        .addComponent(jLabel25)
+                        .addGap(210, 210, 210))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel9Layout.createSequentialGroup()
+                .addGap(44, 44, 44)
+                .addComponent(btnApprove, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnDeny, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20))
+        );
+        jPanel9Layout.setVerticalGroup(
+            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel9Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 365, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel25)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnDeny)
+                    .addComponent(btnApprove))
+                .addContainerGap(38, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("ExtensionRequests", jPanel9);
+
         btnLogout1.setText("LOG OUT");
         btnLogout1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -433,6 +773,82 @@ public class AdminView extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnSendNewsletterActionPerformed
 
+    private void btnSubmitReminderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitReminderActionPerformed
+        // TODO add your handling code here:
+        User targetUser = thisController.getActiveLoans().get(cmbReturnsList.getSelectedIndex()).user;
+        String type = "ReturnReminder";
+        LocalDate sendDate = LocalDate.parse(ftxtDate.getText()) ;
+        String message = txtMessage.getText();
+        thisController.SendReminder(targetUser, type, sendDate, "RETURN REMINDER : " + message);
+        JOptionPane.showMessageDialog(rootPane, "Reminder will be sent to " + targetUser.getName());
+    }//GEN-LAST:event_btnSubmitReminderActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        ftxtDate.setText(LocalDate.now().toString());
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void chbxWeekActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chbxWeekActionPerformed
+        // TODO add your handling code here:
+        if(chbxWeek.isSelected()){
+            //isChecked
+            thisController.WeekReminder = true;
+        }else{
+            thisController.WeekReminder = false;
+        }
+            
+    }//GEN-LAST:event_chbxWeekActionPerformed
+
+    private void chbxOverdueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chbxOverdueActionPerformed
+        // TODO add your handling code here:
+        if(chbxOverdue.isSelected()){
+            //isChecked
+            thisController.OverdueReminder = true;
+        }else{
+            thisController.OverdueReminder = false;
+        }
+    }//GEN-LAST:event_chbxOverdueActionPerformed
+
+    private void chbxBlockActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chbxBlockActionPerformed
+        // TODO add your handling code here:
+        if(chbxBlock.isSelected()){
+            //isChecked
+            thisController.BlockReminder = true;
+        }else{
+            thisController.BlockReminder = false;
+        }
+    }//GEN-LAST:event_chbxBlockActionPerformed
+
+    private void btnDenyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDenyActionPerformed
+        // TODO add your handling code here:
+        if(tblExtensionRequests.getSelectedRow() != -1){
+            ExtensionRequest extReq = thisController.getExtensionRequests().get(tblExtensionRequests.getSelectedRow());
+            thisController.RemoveExtensionRequest(extReq);
+            thisController.SendReminder(extReq.loan.user,"Response", LocalDate.now(), "RESPONSE : Your extension request for " + extReq.loan.resource.Name + " has been denied.");
+            JOptionPane.showMessageDialog(rootPane, "Request Denied");
+        }
+        UpdateResourceRequests();
+        PopulateActiveLoans();
+        PopulateExtensionRequests();
+    }//GEN-LAST:event_btnDenyActionPerformed
+
+    private void btnApproveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnApproveActionPerformed
+        // TODO add your handling code here:
+        if(tblExtensionRequests.getSelectedRow() != -1){
+            ExtensionRequest extReq = thisController.getExtensionRequests().get(tblExtensionRequests.getSelectedRow());
+            thisController.updateLoanLength(extReq.loan, extReq.ExtensionLength);
+            thisController.SendReminder(extReq.loan.user,"Response", LocalDate.now(), "RESPONSE : Your extension request for " + extReq.loan.resource.Name + " has been approved.");
+            thisController.RemoveExtensionRequest(extReq);
+            JOptionPane.showMessageDialog(rootPane, "Request Approved");
+            thisResourceManager.updateStatus(extReq.loan.resource, "Return Date: " + extReq.loan.DateLoaned.plusDays(extReq.loan.LoanLength));
+        }
+        UpdateResourceRequests();
+        PopulateActiveLoans();
+        PopulateExtensionRequests();
+        
+        
+    }//GEN-LAST:event_btnApproveActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -469,13 +885,33 @@ public class AdminView extends javax.swing.JFrame {
 //    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnApprove;
     private javax.swing.JButton btnCreateResource;
+    private javax.swing.JButton btnDeny;
     private javax.swing.JButton btnLogout1;
     private javax.swing.JButton btnSendNewsletter;
+    private javax.swing.JButton btnSubmitReminder;
+    private javax.swing.JCheckBox chbxBlock;
+    private javax.swing.JCheckBox chbxOverdue;
+    private javax.swing.JCheckBox chbxWeek;
+    private javax.swing.JComboBox<String> cmbReturnsList;
+    private javax.swing.JFormattedTextField ftxtDate;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
+    private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel24;
+    private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -485,13 +921,20 @@ public class AdminView extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel7;
+    private javax.swing.JPanel jPanel8;
+    private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable tableResources;
+    private javax.swing.JTable tblExtensionRequests;
     private javax.swing.JTable tblResourceRequests;
     private javax.swing.JComboBox<String> txtCategory;
     private javax.swing.JComboBox<String> txtLoanLength;
+    private javax.swing.JTextField txtMessage;
     private javax.swing.JTextField txtName;
     private javax.swing.JTextField txtNewsletterText;
     private javax.swing.JComboBox<String> txtType;

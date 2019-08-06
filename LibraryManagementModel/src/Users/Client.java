@@ -22,19 +22,4 @@ public class Client extends User{
     private List<Loan> ActiveLoans = new ArrayList<Loan>();
     private List<ExtensionRequest> ActiveExtensionRequests = new ArrayList<ExtensionRequest>();
     
-   
-    
-    public void RateResource(Resource resource, int Rating){
-        resource.RatingCount += 1;
-        resource.RatingTotal += Rating;
-    }
-    
-    public void RequestExtension(Loan loan,int extensionLength){
-        ExtensionRequest requestExtension = new ExtensionRequest();
-        requestExtension.ExtensionRequest(loan, extensionLength);
-    }
-    
-    public List<Loan> ListLoans(){
-        return ActiveLoans;
-    }
 }

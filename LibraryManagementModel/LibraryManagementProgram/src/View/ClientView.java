@@ -101,6 +101,13 @@ public class ClientView extends javax.swing.JFrame {
         jPanel7 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblReminders = new javax.swing.JTable();
+        jPanel8 = new javax.swing.JPanel();
+        jLabel14 = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
+        cmbExtensionList = new javax.swing.JComboBox<>();
+        jLabel16 = new javax.swing.JLabel();
+        spinLength = new javax.swing.JSpinner();
+        btnRequestExtension = new javax.swing.JButton();
         jTitle1 = new javax.swing.JLabel();
         btnLogout = new javax.swing.JButton();
 
@@ -538,6 +545,70 @@ public class ClientView extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Reminders", jPanel7);
 
+        jLabel14.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
+        jLabel14.setText("Request Loan Extension");
+
+        jLabel15.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jLabel15.setText("Your Loans");
+
+        cmbExtensionList.setToolTipText("List of Available Items");
+
+        jLabel16.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jLabel16.setText("Extension Length (Days)");
+
+        btnRequestExtension.setText("REQUEST EXTENSION");
+        btnRequestExtension.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRequestExtensionActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
+        jPanel8.setLayout(jPanel8Layout);
+        jPanel8Layout.setHorizontalGroup(
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel8Layout.createSequentialGroup()
+                        .addContainerGap(185, Short.MAX_VALUE)
+                        .addComponent(jLabel14))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel8Layout.createSequentialGroup()
+                        .addGap(159, 159, 159)
+                        .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel8Layout.createSequentialGroup()
+                                .addComponent(jLabel15)
+                                .addGap(39, 39, 39)
+                                .addComponent(cmbExtensionList, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(jPanel8Layout.createSequentialGroup()
+                                .addComponent(jLabel16)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(spinLength)))))
+                .addGap(164, 164, 164))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(btnRequestExtension, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(235, 235, 235))
+        );
+        jPanel8Layout.setVerticalGroup(
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel8Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmbExtensionList, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(spinLength, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(btnRequestExtension, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(266, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("Request Extension", jPanel8);
+
         jTitle1.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         jTitle1.setText("Client");
 
@@ -584,17 +655,34 @@ public class ClientView extends javax.swing.JFrame {
 
     private void PopulateActiveLoans(){
         cmbReturnItem.removeAllItems();
+        cmbExtensionList.removeAllItems();
         for(Loan loan : thisController.getLoansForUser(thisController.currentlyLoggedIn)){
             cmbReturnItem.addItem(loan.resource.Name);
+            cmbExtensionList.addItem(loan.resource.Name);
         }
     }
     private void LoadReminders(){
         DefaultTableModel model = (DefaultTableModel) tblReminders.getModel();
         model.setRowCount(0);
         for(Reminder reminder : thisController.getReminders()){
-            if(reminder.targetUser == thisController.currentlyLoggedIn){
+            //Newsletters
+            if(reminder.Type == "Newsletter" && reminder.targetUser == thisController.currentlyLoggedIn){
                 model.addRow(new Object[]{reminder.ReminderText});
             }
+            
+            //Reminders
+            if(reminder.Type == "ReturnReminder" && reminder.targetUser == thisController.currentlyLoggedIn){
+                long Days = DAYS.between(LocalDate.now(), reminder.SendDate);
+                if(Days < 0){
+                    model.addRow(new Object[]{reminder.ReminderText});
+                }
+            }
+            
+            if(reminder.Type == "Response" && reminder.targetUser == thisController.currentlyLoggedIn ){
+                model.addRow(new Object[]{reminder.ReminderText});
+            }
+            
+            
         } 
         tblReminders.setModel(model);
     }
@@ -619,12 +707,25 @@ public class ClientView extends javax.swing.JFrame {
 
     private void btnLoanItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoanItemActionPerformed
         // TODO add your handling code here:
-        Resource selectedResource = ResourceManager.getInstance().getAvailableResources().get(cmbBorrowItem.getSelectedIndex());
-        thisController.LoanItem(thisController.currentlyLoggedIn, selectedResource);
-        JOptionPane.showMessageDialog(rootPane, "Loaned Successfully");
-        cmbBorrowItem.removeAllItems();
-        PopulateActiveLoans();
-        LoadAllResources();
+        Boolean AccountBlocked = false;
+        
+        for(Loan loan : thisController.getActiveLoans()){
+            long Days = DAYS.between(LocalDate.now(), loan.DateLoaned.plusDays(loan.LoanLength));   
+            if(loan.user == thisController.currentlyLoggedIn && Days < -20){
+                AccountBlocked = true;       
+            }
+        }
+        if(AccountBlocked == false){
+            Resource selectedResource = ResourceManager.getInstance().getAvailableResources().get(cmbBorrowItem.getSelectedIndex());
+            thisController.LoanItem(thisController.currentlyLoggedIn, selectedResource);
+            JOptionPane.showMessageDialog(rootPane, "Loaned Successfully");
+            cmbBorrowItem.removeAllItems();
+            PopulateActiveLoans();
+            LoadAllResources();
+        }else{
+            JOptionPane.showMessageDialog(rootPane, "Account Blocked. Return overdue item to unblock.");
+        }
+        
     }//GEN-LAST:event_btnLoanItemActionPerformed
 
     private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
@@ -688,6 +789,16 @@ public class ClientView extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnRequestResourceActionPerformed
 
+    private void btnRequestExtensionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRequestExtensionActionPerformed
+        // TODO add your handling code here:
+        Loan selectedLoan = thisController.getLoansForUser(thisController.currentlyLoggedIn).get(cmbExtensionList.getSelectedIndex());
+        int Length = (Integer) spinLength.getValue();
+        
+        thisController.CreateExtensionRequest(selectedLoan, Length);
+        JOptionPane.showMessageDialog(rootPane, "Requested Extension Successfully. Updates will come under 'Reminders'");
+        
+    }//GEN-LAST:event_btnRequestExtensionActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -718,10 +829,12 @@ public class ClientView extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnLoanItem;
     private javax.swing.JButton btnLogout;
+    private javax.swing.JButton btnRequestExtension;
     private javax.swing.JButton btnRequestResource;
     private javax.swing.JButton btnReturnItem;
     private javax.swing.JButton btnSubmitRating;
     private javax.swing.JComboBox<String> cmbBorrowItem;
+    private javax.swing.JComboBox<String> cmbExtensionList;
     private javax.swing.JComboBox<String> cmbRateResources;
     private javax.swing.JComboBox<String> cmbReturnItem;
     private javax.swing.JButton jButton1;
@@ -730,6 +843,9 @@ public class ClientView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -746,6 +862,7 @@ public class ClientView extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
+    private javax.swing.JPanel jPanel8;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;
@@ -756,6 +873,7 @@ public class ClientView extends javax.swing.JFrame {
     private javax.swing.JLabel lblLoanLength;
     private javax.swing.JLabel lblRating;
     private javax.swing.JLabel lblType;
+    private javax.swing.JSpinner spinLength;
     private javax.swing.JSpinner spinnerRating;
     private javax.swing.JTable tableResources;
     private javax.swing.JTable tblReminders;

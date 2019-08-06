@@ -37,18 +37,5 @@ public class ExtensionRequestTest {
     public void tearDown() {
     }
 
-    /**
-     * Test of ExtensionRequest method, of class ExtensionRequest.
-     */
-    @Test
-    public void testExtensionRequest() {
-        System.out.println("ExtensionRequest");
-        Loan loan = null;
-        int extensionLength = 0;
-        ExtensionRequest instance = new ExtensionRequest();
-        instance.ExtensionRequest(loan, extensionLength);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
     
 }

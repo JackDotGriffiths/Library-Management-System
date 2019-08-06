@@ -8,6 +8,7 @@ import librarymanagementmodel.*;
 import Users.*;
 import View.*;
 import java.time.LocalDate;
+import static java.time.temporal.ChronoUnit.DAYS;
 import java.util.ArrayList;
 import javax.swing.*;
 /**
@@ -21,8 +22,13 @@ public class Controller {
     ClientView clientView;
     Login login;
     
+    public Boolean WeekReminder = false;
+    public Boolean OverdueReminder = false;
+    public Boolean BlockReminder = false;
+    
     private ArrayList<Loan> Loans = new ArrayList<Loan>();
     private ArrayList<Reminder> Reminders = new ArrayList<Reminder>(); 
+    private ArrayList<ExtensionRequest> ExtensionRequests = new ArrayList<ExtensionRequest>();
     
     public User currentlyLoggedIn;
     UserManager userManager = UserManager.getInstance();
@@ -85,6 +91,16 @@ public class Controller {
         }  
         return listLoans;
     }
+    public void updateLoanLength(Loan loan, int Addition){
+        int count = 0;
+        for(Loan searchLoan : getActiveLoans()){
+            if(searchLoan == loan){
+                loan.LoanLength = loan.LoanLength + Addition;
+                Loans.set(count, loan);
+            }
+            count ++;
+        }
+    }
  
     public void ReturnItem(Loan returnLoan){
         returnLoan.LoanStatus = "Disabled";
@@ -108,5 +124,45 @@ public class Controller {
     public ArrayList<Reminder> getReminders(){
         return Reminders;
     }
+    public void SendAutoReminders(){
+        int count = 0;
+        for (Reminder reminder : getReminders()){
+            if (reminder.Type == "OverdueWarning"){
+                Reminders.remove(count);
+            }
+            count++;
+        }
+        for(Loan loan : getActiveLoans()){
+            LocalDate DueDate = loan.DateLoaned.plusDays(loan.LoanLength);
+            long Days = DAYS.between(LocalDate.now(), DueDate);
+            
+            if (Days == 7 && WeekReminder == true){
+                SendReminder(loan.user,"OverdueWarning",LocalDate.now(),"AUTOREMINDER : A week before " + loan.resource.Name + " is due back.");
+            }
+            else if(Days < 0 && Days > -20 && OverdueReminder == true){
+                SendReminder(loan.user,"OverdueWarning",LocalDate.now(),"AUTOREMINDER : " + loan.resource.Name + " is now overdue.");
+            }
+            else if(Days < -20 && BlockReminder == true){
+                SendReminder(loan.user,"OverdueWarning",LocalDate.now(),"AUTOREMINDER : " + loan.resource.Name + " is now 20 Days overdue. You are unable to loan more items.");
+            }
+        }
+    }
+    
+    public void CreateExtensionRequest(Loan loan,int length){
+        ExtensionRequest extReq = new ExtensionRequest(loan,length);
+        ExtensionRequests.add(extReq);
+    }
+    public ArrayList<ExtensionRequest> getExtensionRequests(){
+        return ExtensionRequests;
+    }
+    public void RemoveExtensionRequest(ExtensionRequest extReq){
+        for(ExtensionRequest searchExtReq : getExtensionRequests()){
+            if(searchExtReq == extReq){
+                ExtensionRequests.remove(extReq);
+            }
+        }
+    }
+    
+    
     
 }

@@ -12,12 +12,10 @@ package librarymanagementmodel;
 public class ExtensionRequest {
     public Loan loan;
     public int ExtensionLength;
-    public String Status;
     
-    public void ExtensionRequest(Loan loan, int extensionLength){
+    public ExtensionRequest(Loan loan, int extensionLength){
         this.loan = loan;
         this.ExtensionLength = extensionLength;
-        this.Status = "Awaiting";
     }
     
 }

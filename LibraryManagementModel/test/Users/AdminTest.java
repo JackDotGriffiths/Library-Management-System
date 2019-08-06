@@ -65,34 +65,5 @@ public class AdminTest {
         }
         //Ensures instance is created as expected. Data validation will occur through GUI.
     }
-
-
-
-
-    /**
-     * Test of ApproveExtensionRequest method, of class Admin.
-     */
-    @Test
-    public void testApproveExtensionRequest() {
-        System.out.println("ApproveExtensionRequest");
-        ExtensionRequest extensionRequest = null;
-        Admin instance = new Admin("A0001", "admin0", "Mike", "Wazowski");
-        instance.ApproveExtensionRequest(extensionRequest);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("Unable to test.");
-    }
-
-    /**
-     * Test of DenyExtensionRequest method, of class Admin.
-     */
-    @Test
-    public void testDenyExtensionRequest() {
-        System.out.println("DenyExtensionRequest");
-        ExtensionRequest extensionRequest = null;
-        Admin instance = new Admin("A0001", "admin0", "Mike", "Wazowski");
-        instance.DenyExtensionRequest(extensionRequest);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("Unable to test.");
-    }
     
 }
