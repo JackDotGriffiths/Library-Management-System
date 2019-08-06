@@ -823,13 +823,13 @@ public class AdminView extends javax.swing.JFrame {
         // TODO add your handling code here:
         if(tblExtensionRequests.getSelectedRow() != -1){
             ExtensionRequest extReq = thisController.getExtensionRequests().get(tblExtensionRequests.getSelectedRow());
-            thisController.RemoveExtensionRequest(extReq);
             thisController.SendReminder(extReq.loan.user,"Response", LocalDate.now(), "RESPONSE : Your extension request for " + extReq.loan.resource.Name + " has been denied.");
             JOptionPane.showMessageDialog(rootPane, "Request Denied");
+            thisController.RemoveExtensionRequest(extReq);
+            UpdateResourceRequests();
+            PopulateActiveLoans();
+            PopulateExtensionRequests();
         }
-        UpdateResourceRequests();
-        PopulateActiveLoans();
-        PopulateExtensionRequests();
     }//GEN-LAST:event_btnDenyActionPerformed
 
     private void btnApproveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnApproveActionPerformed
@@ -838,15 +838,13 @@ public class AdminView extends javax.swing.JFrame {
             ExtensionRequest extReq = thisController.getExtensionRequests().get(tblExtensionRequests.getSelectedRow());
             thisController.updateLoanLength(extReq.loan, extReq.ExtensionLength);
             thisController.SendReminder(extReq.loan.user,"Response", LocalDate.now(), "RESPONSE : Your extension request for " + extReq.loan.resource.Name + " has been approved.");
-            thisController.RemoveExtensionRequest(extReq);
             JOptionPane.showMessageDialog(rootPane, "Request Approved");
             thisResourceManager.updateStatus(extReq.loan.resource, "Return Date: " + extReq.loan.DateLoaned.plusDays(extReq.loan.LoanLength));
+            thisController.RemoveExtensionRequest(extReq);
+            UpdateResourceRequests();
+            PopulateActiveLoans();
+            PopulateExtensionRequests();
         }
-        UpdateResourceRequests();
-        PopulateActiveLoans();
-        PopulateExtensionRequests();
-        
-        
     }//GEN-LAST:event_btnApproveActionPerformed
 
     /**

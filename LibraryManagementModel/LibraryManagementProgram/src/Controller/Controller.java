@@ -156,11 +156,15 @@ public class Controller {
         return ExtensionRequests;
     }
     public void RemoveExtensionRequest(ExtensionRequest extReq){
+        int count = 0;
+        int countResult = 0;
         for(ExtensionRequest searchExtReq : getExtensionRequests()){
-            if(searchExtReq == extReq){
-                ExtensionRequests.remove(extReq);
+            count ++;
+            if(searchExtReq != extReq){
+                countResult = count;
             }
         }
+        ExtensionRequests.remove(countResult);
     }
     
     
