@@ -1,3 +1,13 @@
+
+
+RUNNING THE PROGRAM
+---------------------
+Open LibraryManagementModel Folder > Open LibraryManagementProject in NetBeans > Go into LibraryManagementProgram/Source Packages/librarymanagementprograam > Run File named LibraryManagementProgram.java
+
+
+
+
+
 ADMIN :
 
 username = A0000
